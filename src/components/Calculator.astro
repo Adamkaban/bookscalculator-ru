@@ -1,0 +1,147 @@
+---
+// Компонент интерактивного калькулятора
+---
+
+<div class="calculator-container bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl shadow-xl p-8 md:p-12">
+  <h3 class="text-2xl font-semibold text-slate-900 mb-8 text-center">
+    Если я буду читать ... минут в день со скоростью ... в течение ..., то я прочитаю ...
+  </h3>
+
+  <div class="calculator-form grid md:grid-cols-3 gap-6 mb-8">
+    <!-- Время чтения в день -->
+    <div class="form-group">
+      <label for="minutes-per-day" class="block text-sm font-medium text-slate-700 mb-2">
+        ⏰ Время чтения в день
+      </label>
+      <select id="minutes-per-day" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+        <option value="">Выберите время</option>
+        <option value="5">5 минут</option>
+        <option value="10">10 минут</option>
+        <option value="15">15 минут</option>
+        <option value="20">20 минут</option>
+        <option value="25">25 минут</option>
+        <option value="30">30 минут</option>
+        <option value="40">40 минут</option>
+        <option value="50">50 минут</option>
+        <option value="60">1 час</option>
+        <option value="120">2 часа</option>
+        <option value="300">5 часов</option>
+      </select>
+    </div>
+
+    <!-- Скорость чтения -->
+    <div class="form-group">
+      <label for="reading-speed" class="block text-sm font-medium text-slate-700 mb-2">
+        🚀 Скорость чтения
+      </label>
+      <select id="reading-speed" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+        <option value="">Выберите скорость</option>
+        <option value="150">🐌 Очень медленно (150 слов/мин)</option>
+        <option value="200">🐢 Медленно (200 слов/мин)</option>
+        <option value="250">🐒 Средне (250 слов/мин)</option>
+        <option value="325">🐆 Быстро (325 слов/мин)</option>
+        <option value="400">🦅 Очень быстро (400+ слов/мин)</option>
+        <option value="unknown">Не знаю 🙄</option>
+      </select>
+    </div>
+
+    <!-- Временной период -->
+    <div class="form-group">
+      <label for="time-period" class="block text-sm font-medium text-slate-700 mb-2">
+        📅 Временной период
+      </label>
+      <select id="time-period" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+        <option value="">Выберите период</option>
+        <option value="1 месяц">1 месяц</option>
+        <option value="3 месяца">3 месяца</option>
+        <option value="6 месяцев">6 месяцев</option>
+        <option value="1 год">1 год</option>
+        <option value="10 лет">10 лет</option>
+        <option value="50 лет">50 лет</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Кнопка расчета -->
+  <div class="text-center mb-8">
+    <button id="calculate-button" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+      Рассчитать! ✨
+    </button>
+  </div>
+
+  <!-- Результаты -->
+  <div id="calculator-results" class="results-container">
+    <!-- Результаты будут появляться здесь -->
+  </div>
+
+  <!-- Кнопка теста скорости (показывается только при выборе "Не знаю") -->
+  <div id="speed-test-container" class="text-center mt-6 hidden">
+    <button id="speed-test-button" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 hover:shadow-md">
+      Определить скорость чтения 🧪
+    </button>
+    <p class="text-xs text-slate-500 mt-2">Переход на внешний сервис (откроется в новой вкладке)</p>
+  </div>
+</div>
+
+<script>
+  import { initCalculator } from '../scripts/calculator.js';
+
+  // Инициализируем калькулятор
+  document.addEventListener('DOMContentLoaded', function() {
+    initCalculator();
+
+    // Показываем кнопку теста скорости при выборе "Не знаю"
+    const speedSelect = document.getElementById('reading-speed');
+    const speedTestContainer = document.getElementById('speed-test-container');
+
+    if (speedSelect && speedTestContainer) {
+      speedSelect.addEventListener('change', function() {
+        if (this.value === 'unknown') {
+          speedTestContainer.classList.remove('hidden');
+        } else {
+          speedTestContainer.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .calculator-container {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .form-group select:hover {
+    border-color: #3b82f6;
+  }
+
+  .result-item {
+    transition: transform 0.2s ease;
+  }
+
+  .result-item:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Адаптивность для мобильных */
+  @media (max-width: 768px) {
+    .calculator-form {
+      grid-template-columns: 1fr;
+    }
+
+    .calculator-container {
+      padding: 1.5rem;
+    }
+  }
+</style>

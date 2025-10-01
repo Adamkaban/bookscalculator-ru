@@ -1,0 +1,315 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+import { getRelatedBooks, getBookUrl, getDifficultyLevel } from '../utils/bookData.js';
+
+// Данные книги (в реальном проекте будут загружаться динамически)
+const book = {
+  "id": "volshebnoe-koltso-platonov",
+  "title": "Волшебное кольцо",
+  "author": "Андрей Платонов",
+  "slug": "skolko-chitat-volshebnoe-koltso",
+  "basic_info": {
+    "pages": 28,
+    "words": 8400,
+    "genre": "Литературная сказка",
+    "difficulty": "Средняя",
+    "year_written": 1936,
+    "reading_time": "40-50 минут",
+    "reading_days": "1-2 дня",
+    "recommended_age": "от 10 лет"
+  },
+  "interesting_facts": [
+    "Написана за 3 недели в декабре 1936 года для дочери Маши",
+    "Основана на русской народной сказке из сборника Афанасьева",
+    "Впервые опубликована только в 1962 году, через 10 лет после смерти автора",
+    "Переведена на 19 языков, особенно популярна в Германии",
+    "Экранизирована в 1979 году режиссером Иваном Аксенчуком"
+  ],
+  "related_works": [
+    "Неизвестный цветок Платонова (8 страниц - меньше в 3.5 раза)",
+    "Никита Платонова (16 страниц - меньше в 1.8 раза)",
+    "Финист - ясный сокол (народная сказка, 12 страниц - меньше в 2.3 раза)",
+    "Каштанка Чехова (18 страниц - меньше в 1.6 раза)"
+  ],
+  "historical_context": {
+    "creation_period": "Создавалась в период опалы автора как возвращение к истокам народного творчества",
+    "historical_accuracy": "Основана на подлинной народной сказке с авторской литературной обработкой"
+  },
+  "genre_features": {
+    "genre_comparison": "Сочетает народную сказку с авторской прозой, отличается от классических сказок философской глубиной",
+    "structure_analysis": "Построена по канонам волшебной сказки с троекратными повторами и магическими помощниками"
+  },
+  "reading_tips": {
+    "reading_schedules": {
+      "speed": "Быстрый режим: 28 страниц за один присест, 45 минут",
+      "standard": "Стандартный режим: 14 страниц в день, 2 дня",
+      "comfort": "Комфортный режим: 9 страниц в день, 3 дня"
+    },
+    "practical_hacks": [
+      "Сравните с народной сказкой-первоисточником для понимания авторской работы",
+      "Обращайте внимание на особый платоновский язык и синтаксис",
+      "Ведите список волшебных предметов и существ",
+      "Отмечайте философские размышления в сказочном сюжете",
+      "Читайте медленно описания природы - они символичны",
+      "Обратите внимание на тему добра и справедливости",
+      "Анализируйте характер главного героя Семена"
+    ]
+  },
+  "cultural_significance": {
+    "literary_impact": "Показала возможности литературной обработки фольклора, повлияла на современную детскую литературу",
+    "practical_value": "Знакомит с народными традициями, развивает нравственные качества, учит доброте и справедливости"
+  },
+  "modern_adaptations": {
+    "films_series": "Экранизация 1979 года И.Аксенчука, мультфильм 1995 года, радиоспектакль 1983 года",
+    "theater_opera": "Поставлена в детских театрах России, кукольные спектакли"
+  },
+  "seo": {
+    "meta_title": "Сколько страниц в Волшебном кольце | Время чтения",
+    "meta_description": "Волшебное кольцо Платонова: 28 страниц, 40-50 минут чтения. График чтения сказки, советы и факты.",
+    "keywords": [
+      "волшебное кольцо платонов сколько страниц",
+      "волшебное кольцо сколько времени читать",
+      "как читать волшебное кольцо",
+      "время чтения платонов"
+    ]
+  }
+};
+const relatedBooks = getRelatedBooks(book.id);
+const difficulty = getDifficultyLevel(book);
+---
+
+<BaseLayout>
+  <SEOHead
+    title={book.seo.meta_title}
+    description={book.seo.meta_description}
+    keywords={book.seo.keywords.join(', ')}
+  />
+
+  <style>
+    h2 {
+      background: #f8fafc !important;
+      border-bottom: 4px solid #3b82f6 !important;
+      padding: 1rem !important;
+      margin: 2rem 0 1rem 0 !important;
+      border-radius: 8px 8px 0 0 !important;
+      font-weight: 700 !important;
+    }
+
+    h3 {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 0.75rem !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+      font-weight: 600 !important;
+    }
+
+    .info-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .difficulty-easy { background-color: #dcfce7; color: #166534; }
+    .difficulty-medium { background-color: #dbeafe; color: #1e40af; }
+    .difficulty-hard { background-color: #fee2e2; color: #dc2626; }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              {book.title} - {book.author}
+            </h1>
+            <p class="text-xl text-slate-600 mb-4">
+              Подробная информация о книге, время чтения и практические советы
+            </p>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 inline-block">
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="info-card bg-white rounded-lg p-4 border border-slate-200">
+                  <div class="text-2xl mb-2">📖</div>
+                  <div class="text-lg font-bold text-blue-600">{book.basic_info.pages}</div>
+                  <div class="text-sm text-slate-600">страниц</div>
+                </div>
+                <div class="info-card bg-white rounded-lg p-4 border border-slate-200">
+                  <div class="text-2xl mb-2">⏰</div>
+                  <div class="text-lg font-bold text-green-600">{book.basic_info.reading_time}</div>
+                  <div class="text-sm text-slate-600">время чтения</div>
+                </div>
+                <div class="info-card bg-white rounded-lg p-4 border border-slate-200">
+                  <div class="text-2xl mb-2">📚</div>
+                  <div class="text-lg font-bold text-purple-600">{book.basic_info.genre}</div>
+                  <div class="text-sm text-slate-600">жанр</div>
+                </div>
+                <div class="info-card bg-white rounded-lg p-4 border border-slate-200">
+                  <div class="text-2xl mb-2 difficulty-{difficulty.color === 'green' ? '🟢' : difficulty.color === 'blue' ? '🔵' : '🔴'}"></div>
+                  <div class="text-lg font-bold text-orange-600">{difficulty.label}</div>
+                  <div class="text-sm text-slate-600">сложность</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Основной контент -->
+      <section class="py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="prose prose-lg prose-slate max-w-none">
+
+              <h2>📊 Основная информация</h2>
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-blue-900 mb-4">Технические характеристики</h3>
+                  <ul class="space-y-2 text-blue-800">
+                    <li><strong>Количество страниц:</strong> {book.basic_info.pages}</li>
+                    <li><strong>Количество слов:</strong> {book.basic_info.words.toLocaleString('ru-RU')}</li>
+                    <li><strong>Рекомендуемый возраст:</strong> {book.basic_info.recommended_age}</li>
+                    <li><strong>Год написания:</strong> {book.basic_info.year_written}</li>
+                  </ul>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-green-900 mb-4">Время чтения</h3>
+                  <ul class="space-y-2 text-green-800">
+                    <li><strong>Среднее время:</strong> {book.basic_info.reading_time}</li>
+                    <li><strong>Дней на чтение:</strong> {book.basic_info.reading_days}</li>
+                    <li><strong>Скорость чтения:</strong> 250 слов/мин</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2>💡 Интересные факты</h2>
+              <ul class="space-y-3 mb-8">
+                {book.interesting_facts.map((fact, index) => (
+                  <li class="flex items-start bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                    <span class="text-yellow-600 text-xl mr-3">{index + 1}.</span>
+                    <span class="text-slate-700">{fact}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <h2>🏛️ Исторический контекст</h2>
+              <div class="bg-slate-50 border-l-4 border-slate-400 p-6 mb-8">
+                <h3 class="text-slate-800 font-semibold mb-3">Период создания:</h3>
+                <p class="text-slate-700 mb-4">{book.historical_context.creation_period}</p>
+                <h3 class="text-slate-800 font-semibold mb-3">Историческая точность:</h3>
+                <p class="text-slate-700">{book.historical_context.historical_accuracy}</p>
+              </div>
+
+              <h2>🎭 Особенности жанра</h2>
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-purple-900 mb-4">Сравнение с жанром</h3>
+                  <p class="text-purple-800">{book.genre_features.genre_comparison}</p>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-indigo-900 mb-4">Структура произведения</h3>
+                  <p class="text-indigo-800">{book.genre_features.structure_analysis}</p>
+                </div>
+              </div>
+
+              <h2>📖 Советы по чтению</h2>
+
+              <h3>Графики чтения:</h3>
+              <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                  <h4 class="font-semibold text-green-900 mb-2">Быстрый режим</h4>
+                  <p class="text-green-700 text-sm">{book.reading_tips.reading_schedules.speed}</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+                  <h4 class="font-semibold text-blue-900 mb-2">Стандартный режим</h4>
+                  <p class="text-blue-700 text-sm">{book.reading_tips.reading_schedules.standard}</p>
+                </div>
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+                  <h4 class="font-semibold text-purple-900 mb-2">Комфортный режим</h4>
+                  <p class="text-purple-700 text-sm">{book.reading_tips.reading_schedules.comfort}</p>
+                </div>
+              </div>
+
+              <h3>Практические рекомендации:</h3>
+              <ul class="space-y-2 mb-8">
+                {book.reading_tips.practical_hacks.map((hack, index) => (
+                  <li class="flex items-start">
+                    <span class="text-blue-600 mr-2">•</span>
+                    <span class="text-slate-700">{hack}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <h2>🌟 Культурное значение</h2>
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-emerald-900 mb-4">Литературное влияние</h3>
+                  <p class="text-emerald-800">{book.cultural_significance.literary_impact}</p>
+                </div>
+                <div class="bg-teal-50 border border-teal-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-teal-900 mb-4">Практическая ценность</h3>
+                  <p class="text-teal-800">{book.cultural_significance.practical_value}</p>
+                </div>
+              </div>
+
+              <h2>🔗 Связанные произведения</h2>
+              <div class="grid md:grid-cols-2 gap-4 mb-8">
+                {book.related_works.map((related, index) => (
+                  <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-slate-900 mb-2">{index + 1}. {related.split(' (')[0]}</h4>
+                    <p class="text-slate-600 text-sm">{related}</p>
+                  </div>
+                ))}
+              </div>
+
+              <CTABanner />
+
+              <h2>🎬 Современные адаптации</h2>
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-red-900 mb-4">Фильмы и сериалы</h3>
+                  <p class="text-red-800">{book.modern_adaptations.films_series}</p>
+                </div>
+                <div class="bg-pink-50 border border-pink-200 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-pink-900 mb-4">Театр и опера</h3>
+                  <p class="text-pink-800">{book.modern_adaptations.theater_opera}</p>
+                </div>
+              </div>
+
+              <h2>📚 Другие книги для чтения</h2>
+              <div class="grid md:grid-cols-3 gap-4 mb-8">
+                {relatedBooks.map((relatedBook) => (
+                  <a
+                    href={getBookUrl(relatedBook)}
+                    class="block bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 hover:from-blue-100 hover:to-indigo-100 transition-all duration-200"
+                  >
+                    <h3 class="font-semibold text-blue-900 mb-2">{relatedBook.title}</h3>
+                    <p class="text-blue-700 text-sm mb-3">{relatedBook.author}</p>
+                    <div class="text-xs text-blue-600">
+                      <span>{relatedBook.basic_info.pages} стр • {relatedBook.basic_info.reading_time}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <QuoteBlock />
+  <SimpleFooter />
+</BaseLayout>

@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+
+// Данные для интерактивной таблицы времени чтения
+const readingData = [
+  { pages: 1, speeds: { 150: '3.3 мин', 200: '2.5 мин', 250: '2 мин', 325: '1.5 мин', 400: '1.3 мин' } },
+  { pages: 10, speeds: { 150: '33 мин', 200: '25 мин', 250: '20 мин', 325: '15 мин', 400: '13 мин' } },
+  { pages: 20, speeds: { 150: '1 ч 07 мин', 200: '50 мин', 250: '40 мин', 325: '31 мин', 400: '25 мин' } },
+  { pages: 30, speeds: { 150: '1 ч 40 мин', 200: '1 ч 15 мин', 250: '60 мин', 325: '46 мин', 400: '38 мин' } },
+  { pages: 40, speeds: { 150: '2 ч 13 мин', 200: '1 ч 40 мин', 250: '1 ч 20 мин', 325: '1 ч 02 мин', 400: '50 мин' } },
+  { pages: 50, speeds: { 150: '2 ч 47 мин', 200: '2 ч 05 мин', 250: '1 ч 40 мин', 325: '1 ч 17 мин', 400: '1 ч 03 мин' } },
+  { pages: 100, speeds: { 150: '5 ч 33 мин', 200: '4 ч 10 мин', 250: '3 ч 20 мин', 325: '2 ч 34 мин', 400: '2 ч 05 мин' } },
+  { pages: 150, speeds: { 150: '8 ч 20 мин', 200: '6 ч 15 мин', 250: '5 ч 00 мин', 325: '3 ч 51 мин', 400: '3 ч 08 мин' } },
+  { pages: 200, speeds: { 150: '11 ч 07 мин', 200: '8 ч 20 мин', 250: '6 ч 40 мин', 325: '5 ч 08 мин', 400: '4 ч 10 мин' } },
+  { pages: 250, speeds: { 150: '13 ч 53 мин', 200: '10 ч 25 мин', 250: '8 ч 20 мин', 325: '6 ч 25 мин', 400: '5 ч 13 мин' } },
+  { pages: 300, speeds: { 150: '16 ч 40 мин', 200: '12 ч 30 мин', 250: '10 ч 00 мин', 325: '7 ч 42 мин', 400: '6 ч 15 мин' } },
+  { pages: 350, speeds: { 150: '19 ч 27 мин', 200: '14 ч 35 мин', 250: '11 ч 40 мин', 325: '8 ч 59 мин', 400: '7 ч 18 мин' } },
+  { pages: 400, speeds: { 150: '22 ч 13 мин', 200: '16 ч 40 мин', 250: '13 ч 20 мин', 325: '10 ч 15 мин', 400: '8 ч 20 мин' } },
+  { pages: 450, speeds: { 150: '25 ч 00 мин', 200: '18 ч 45 мин', 250: '15 ч 00 мин', 325: '11 ч 32 мин', 400: '9 ч 23 мин' } },
+  { pages: 500, speeds: { 150: '27 ч 47 мин', 200: '20 ч 50 мин', 250: '16 ч 40 мин', 325: '12 ч 49 мин', 400: '10 ч 25 мин' } },
+  { pages: 750, speeds: { 150: '41 ч 40 мин', 200: '31 ч 15 мин', 250: '25 ч 00 мин', 325: '19 ч 14 мин', 400: '15 ч 38 мин' } },
+  { pages: 1000, speeds: { 150: '55 ч 33 мин', 200: '41 ч 40 мин', 250: '33 ч 20 мин', 325: '25 ч 39 мин', 400: '20 ч 50 мин' } }
+];
+
+const speedColumns = [
+  { key: 150, name: 'ОЧЕНЬ МЕДЛЕННО', subtitle: '(150 СВМ)', icon: '🐌' },
+  { key: 200, name: 'МЕДЛЕННО', subtitle: '(200 СВМ)', icon: '🦥' },
+  { key: 250, name: 'СРЕДНЕ', subtitle: '(250 СВМ)', icon: '🐒' },
+  { key: 325, name: 'БЫСТРО', subtitle: '(325 СВМ)', icon: '🐆' },
+  { key: 400, name: 'ОЧЕНЬ БЫСТРО', subtitle: '(400+ СВМ)', icon: '🦅' }
+];
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Калькулятор времени чтения страниц - 20, 50, 100, 200 страниц"
+    description="Интерактивная таблица времени чтения страниц при разных скоростях: от 150 до 400+ слов в минуту. Рассчитайте, сколько времени уйдет на чтение от 20 до 200 страниц."
+    keywords="калькулятор времени чтения, сколько времени читать страницы, скорость чтения, время на книгу, планирование чтения, 20 страниц, 50 страниц, 100 страниц, 200 страниц"
+  />
+
+  <style>
+    /* Стили для динамического заголовка */
+    .typewriter-text {
+      border-right: 3px solid #10b981;
+      animation: blink 1s infinite;
+      display: inline-block;
+    }
+
+    @keyframes blink {
+      0%, 50% { border-color: #10b981; }
+      51%, 100% { border-color: transparent; }
+    }
+
+    /* Компактные стили для таблицы */
+    .reading-table {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      font-size: 0.875rem;
+    }
+
+    .table-header {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+    }
+
+    .table-cell {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e5e7eb;
+      transition: all 0.15s ease;
+      padding: 0.5rem 0.25rem;
+    }
+
+    .table-cell:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-0.5px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .pages-cell {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      font-weight: 600;
+      color: #0369a1;
+      padding: 0.5rem;
+    }
+
+    /* Адаптивность для компактной таблицы */
+    @media (max-width: 768px) {
+      .reading-table {
+        font-size: 0.75rem;
+      }
+
+      .table-cell {
+        padding: 0.375rem 0.125rem;
+      }
+
+      .pages-cell {
+        padding: 0.375rem;
+      }
+
+      .typewriter-text {
+        border-right: none;
+      }
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <!-- Hero секция с динамическим заголовком -->
+      <section class="hero-section py-20">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">
+              Сколько по времени читать
+              <span id="dynamic-pages" class="typewriter-text text-green-600">100 страниц?</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-600 mb-8">
+              Выберите свою скорость чтения, чтобы узнать количество времени!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Интерактивная таблица -->
+      <section class="py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-7xl mx-auto">
+            <div class="reading-table">
+              <div class="table-header p-4">
+                <div class="grid grid-cols-6 gap-2 text-center">
+                  <div class="font-bold text-lg">PAGES</div>
+                  {speedColumns.map(speed => (
+                    <div class="text-center">
+                      <div class="text-2xl mb-1">{speed.icon}</div>
+                      <div class="font-bold">{speed.name}</div>
+                      <div class="text-sm opacity-75">{speed.subtitle}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div class="divide-y divide-slate-200">
+                {readingData.map(row => (
+                  <div class="grid grid-cols-6 gap-2 p-3 hover:bg-slate-50 transition-colors">
+                    <div class="pages-cell text-center font-bold text-lg py-3">
+                      {row.pages}
+                    </div>
+                    {speedColumns.map(speed => (
+                      <div class="table-cell text-center font-medium py-3">
+                        {row.speeds[speed.key]}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Информация о скоростях чтения -->
+            <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <div class="grid md:grid-cols-2 gap-6 text-center">
+                <div>
+                  <h3 class="text-lg font-semibold text-blue-900 mb-2">Средняя скорость чтения</h3>
+                  <div class="text-3xl font-bold text-blue-600 mb-1">250 СВМ</div>
+                  <p class="text-blue-700 text-sm">слов в минуту для взрослого человека</p>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-blue-900 mb-2">Профессиональная скорость</h3>
+                  <div class="text-3xl font-bold text-green-600 mb-1">400+ СВМ</div>
+                  <p class="text-blue-700 text-sm">слов в минуту для дикторов и спикеров</p>
+                </div>
+              </div>
+
+              <div class="mt-4 text-center">
+                <p class="text-blue-800 text-sm">
+                  <strong>СВМ</strong> - слов в минуту. Скорость чтения можно развивать с помощью специальных упражнений и регулярной практики.
+                </p>
+              </div>
+            </div>
+
+            <!-- Краткие рекомендации по чтению -->
+            <div class="mt-8 grid md:grid-cols-3 gap-4">
+              <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-2xl mb-2">📖</div>
+                <h3 class="font-semibold text-slate-900 mb-2">Измерьте свою скорость</h3>
+                <p class="text-slate-600 text-sm">
+                  Засеките время чтения 5-10 страниц и рассчитайте скорость в СВМ
+                </p>
+              </div>
+
+              <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="font-semibold text-slate-900 mb-2">Развивайте навык</h3>
+                <p class="text-slate-600 text-sm">
+                  Регулярная практика поможет увеличить скорость без потери качества
+                </p>
+              </div>
+
+              <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-2xl mb-2">🎯</div>
+                <h3 class="font-semibold text-slate-900 mb-2">Планируйте чтение</h3>
+                <p class="text-slate-600 text-sm">
+                  Используйте таблицу для расчета времени на любую книгу
+                </p>
+              </div>
+            </div>
+
+            <!-- CTA для главной страницы -->
+            <div class="mt-8 text-center">
+              <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
+                <h3 class="text-lg font-semibold text-green-900 mb-2">Хотите узнать время чтения для конкретной книги?</h3>
+                <p class="text-green-700 mb-4">
+                  Перейдите на главную страницу и рассчитайте время для любой книги с персональными настройками
+                </p>
+                <a href="/" class="inline-block">
+                  <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:scale-105">
+                    Калькулятор книг 📚
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Цитата в конце страницы -->
+  <QuoteBlock />
+
+  <SimpleFooter />
+</BaseLayout>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</BaseLayout>
+
+<!-- SEO мета-теги для социальных сетей -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Калькулятор времени чтения страниц - 20, 50, 100, 200 страниц">
+<meta property="og:description" content="Интерактивная таблица времени чтения страниц при разных скоростях: от 150 до 400+ слов в минуту. Рассчитайте, сколько времени уйдет на чтение от 20 до 200 страниц.">
+<meta property="og:url" content="https://bookscalculator.ru/skolko-chitat-100-stranic">
+<meta property="og:site_name" content="BooksCalculator.ru">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Калькулятор времени чтения страниц - 20, 50, 100, 200 страниц">
+<meta name="twitter:description" content="Интерактивная таблица времени чтения страниц при разных скоростях чтения">
+
+<!-- Структурированные данные Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Калькулятор времени чтения страниц - 20, 50, 100, 200 страниц",
+  "description": "Интерактивная таблица для расчета времени чтения страниц при разных скоростях чтения",
+  "url": "https://bookscalculator.ru/skolko-chitat-100-stranic",
+  "applicationCategory": "Utility",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "RUB"
+  },
+  "featureList": [
+    "Расчет времени чтения от 20 до 200 страниц",
+    "5 уровней скорости чтения",
+    "Адаптивный дизайн для мобильных устройств",
+    "Анимация печатания в заголовке"
+  ]
+}
+</script>
+
+<!-- Дополнительные мета-теги для мобильных устройств -->
+<meta name="theme-color" content="#3b82f6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<script>
+  // Динамический заголовок с анимацией печатания
+  class DynamicTitle {
+    constructor() {
+      this.titles = [
+        '20 страниц?',
+        '50 страниц?',
+        '100 страниц?',
+        '200 страниц?'
+      ];
+      this.currentIndex = 0;
+      this.element = document.getElementById('dynamic-pages');
+      this.isDeleting = false;
+      this.typingSpeed = 150;
+      this.deletingSpeed = 75;
+      this.pauseTime = 2000;
+
+      this.init();
+    }
+
+    init() {
+      this.type();
+    }
+
+    async type() {
+      const currentTitle = this.titles[this.currentIndex];
+
+      if (this.isDeleting) {
+        // Удаляем текст посимвольно
+        const currentText = this.element.textContent;
+        this.element.textContent = currentText.substring(0, currentText.length - 1);
+
+        if (this.element.textContent === '') {
+          this.isDeleting = false;
+          this.currentIndex = (this.currentIndex + 1) % this.titles.length;
+          setTimeout(() => this.type(), 500);
+        } else {
+          setTimeout(() => this.type(), this.deletingSpeed);
+        }
+      } else {
+        // Добавляем текст посимвольно
+        const currentText = this.element.textContent;
+        const nextChar = currentTitle.substring(0, currentText.length + 1);
+
+        if (currentText.length < currentTitle.length) {
+          this.element.textContent = nextChar;
+          setTimeout(() => this.type(), this.typingSpeed);
+        } else {
+          // Текст напечатан полностью
+          setTimeout(() => {
+            this.isDeleting = true;
+            this.type();
+          }, this.pauseTime);
+        }
+      }
+    }
+  }
+
+  // Инициализация анимации заголовка
+  document.addEventListener('DOMContentLoaded', () => {
+    new DynamicTitle();
+  });
+</script>

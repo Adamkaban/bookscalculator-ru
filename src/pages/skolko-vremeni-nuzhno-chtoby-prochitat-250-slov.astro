@@ -1,0 +1,760 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+
+// Данные для калькулятора времени чтения
+const readingSpeeds = [
+  { id: 'real-slow', name: 'Очень медленно', wpm: 150, emoji: '🐌', description: '150 слов/мин' },
+  { id: 'slow', name: 'Медленно', wpm: 200, emoji: '🐢', description: '200 слов/мин' },
+  { id: 'medium', name: 'Средне', wpm: 250, emoji: '🐒', description: '250 слов/мин' },
+  { id: 'fast', name: 'Быстро', wpm: 325, emoji: '🐆', description: '325 слов/мин' },
+  { id: 'real-fast', name: 'Очень быстро', wpm: 400, emoji: '🦅', description: '400+ слов/мин' }
+];
+
+const wordCounts = [10, 50, 100, 250, 500, 1000, 5000, 10000, 70000, 100000];
+
+// Функция для расчета времени чтения
+function calculateReadingTime(words, wpm) {
+  const minutes = Math.ceil(words / wpm);
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (hours === 0) {
+    return remainingMinutes === 0 ? '0 мин' : `${remainingMinutes} мин`;
+  } else if (remainingMinutes === 0) {
+    return `${hours} ч`;
+  } else {
+    return `${hours} ч ${remainingMinutes} мин`;
+  }
+}
+
+// Функция для расчета секунд
+function calculateReadingTimeSeconds(words, wpm) {
+  const totalSeconds = Math.ceil((words / wpm) * 60);
+
+  if (totalSeconds < 60) {
+    return `${totalSeconds} сек`;
+  } else {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return seconds === 0 ? `${minutes} мин` : `${minutes} мин ${seconds} сек`;
+  }
+}
+
+// SEO данные - оптимизировано для Яндекс
+const seoData = {
+  title: "Калькулятор времени чтения слов онлайн - рассчитать за секунды | 100, 250, 500, 1000 слов",
+  description: "Бесплатный онлайн калькулятор времени чтения слов. Рассчитайте за секунды, сколько времени нужно для чтения 100, 250, 500, 1000, 5000 слов при разных скоростях чтения от 150 до 400 слов в минуту. Таблица с точными расчетами для планирования чтения.",
+  keywords: [
+    "калькулятор времени чтения слов",
+    "сколько времени читать 250 слов",
+    "время чтения 100 слов",
+    "калькулятор чтения 500 слов",
+    "скорость чтения слов в минуту",
+    "таблица времени чтения",
+    "сколько минут читать 1000 слов",
+    "калькулятор слов в минуту",
+    "сколько времени читать текст",
+    "расчет времени на чтение",
+    "калькулятор чтения онлайн",
+    "время чтения книги калькулятор",
+    "сколько времени уйдет на чтение",
+    "калькулятор скорости чтения"
+  ]
+};
+---
+
+<BaseLayout title={seoData.title} description={seoData.description}>
+  <SEOHead
+    title={seoData.title}
+    description={seoData.description}
+    keywords={seoData.keywords.join(', ')}
+  />
+
+  <style>
+    h2 {
+      background: #f8fafc !important;
+      border-bottom: 4px solid #3b82f6 !important;
+      padding: 1rem !important;
+      margin: 2rem 0 1rem 0 !important;
+      border-radius: 8px 8px 0 0 !important;
+      font-weight: 700 !important;
+    }
+
+    h3 {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 0.75rem !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+      font-weight: 600 !important;
+    }
+
+
+    .time-cell {
+      transition: background-color 0.2s ease;
+    }
+
+    .time-cell:hover {
+      background-color: #f0f9ff !important;
+    }
+
+    .highlight-250 {
+      background-color: #dbeafe !important;
+      font-weight: 600;
+      border: 2px solid #3b82f6;
+    }
+
+    /* Стили для слайдера */
+    .slider::-webkit-slider-thumb {
+      appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #3b82f6;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .slider::-moz-range-thumb {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #3b82f6;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .slider::-webkit-slider-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      outline: none;
+    }
+
+    .slider::-moz-range-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      outline: none;
+    }
+
+    /* Оптимизированные анимации с аппаратным ускорением */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Аппаратное ускорение для интерактивных элементов */
+    .time-cell,
+    .speed-selector,
+    tbody tr,
+    #calculator-section {
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    /* Оптимизация трансформаций */
+    tbody tr:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Оптимизированная анимация курсора */
+    #dynamic-words {
+      border-right: 3px solid #2563eb;
+      animation: blink 1s infinite;
+      will-change: border-color;
+    }
+
+    @keyframes blink {
+      0%, 50% { border-color: #2563eb; }
+      51%, 100% { border-color: transparent; }
+    }
+
+    /* Отключаем анимацию на мобильных для производительности */
+    @media (max-width: 768px) {
+      #dynamic-words {
+        border-right: none;
+        animation: none;
+      }
+    }
+
+    /* Кликабельные строки таблицы */
+    tbody tr:hover {
+      background-color: #f8fafc !important;
+      transition: background-color 0.2s ease;
+    }
+
+    /* Планшетная адаптация */
+    @media (max-width: 1024px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem !important;
+      }
+
+      .mobile-scroll table {
+        min-width: 550px;
+      }
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+      }
+
+      h2 {
+        font-size: 1.5rem !important;
+        padding: 0.75rem !important;
+      }
+
+      h3 {
+        font-size: 1.25rem !important;
+        padding: 0.5rem !important;
+      }
+
+      .mobile-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -1rem;
+        padding: 0 1rem;
+      }
+
+      .mobile-scroll table {
+        min-width: 500px;
+        font-size: 0.875rem;
+      }
+
+      /* Улучшенная мобильная таблица */
+      .mobile-scroll th,
+      .mobile-scroll td {
+        padding: 0.5rem 0.25rem;
+        min-width: 60px;
+      }
+
+      /* Мобильная адаптация слайдера */
+      .slider {
+        height: 8px;
+        margin: 0.5rem 0;
+      }
+
+      .slider::-webkit-slider-thumb {
+        height: 28px;
+        width: 28px;
+      }
+
+      .slider::-moz-range-thumb {
+        height: 28px;
+        width: 28px;
+      }
+
+      /* Адаптивность карточек преимуществ */
+      .grid-cols-3 {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+      }
+
+      /* Улучшенная мобильная навигация */
+      .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+    }
+
+    /* Маленькие мобильные устройства */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.75rem !important;
+      }
+
+      .mobile-scroll th,
+      .mobile-scroll td {
+        padding: 0.375rem 0.125rem;
+        font-size: 0.75rem;
+      }
+
+      .mobile-scroll table {
+        min-width: 450px;
+      }
+
+      /* Компактные карточки на очень маленьких экранах */
+      .bg-white.rounded-lg.p-4 {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-12">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6" id="main-title">
+              Сколько времени нужно, чтобы прочитать
+              <span id="dynamic-words" class="text-blue-600">250 слов?</span>
+            </h1>
+            <p class="text-xl text-slate-600 mb-8" id="main-description">
+              Кликните на любую строку в таблице ниже, чтобы рассчитать точное время чтения
+            </p>
+
+
+            <!-- Объединенный блок слайдера и результатов (показывается только при клике) -->
+            <div id="calculator-section" class="bg-white rounded-xl shadow-lg p-6 mb-6 max-w-2xl mx-auto hidden">
+              <div class="grid md:grid-cols-1 gap-6">
+                <!-- Слайдер для выбора скорости чтения -->
+                <div class="bg-slate-50 rounded-lg p-4">
+                  <label for="speed-slider" class="block text-sm font-medium text-slate-700 mb-3 text-center">
+                    🎛️ Выберите скорость чтения: <span id="current-speed">250 слов/мин</span>
+                  </label>
+                  <input
+                    type="range"
+                    id="speed-slider"
+                    min="150"
+                    max="400"
+                    value="250"
+                    step="25"
+                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                  />
+                  <div class="flex justify-between text-xs text-slate-500 mt-2">
+                    <span>🐌 150 слов/мин</span>
+                    <span>🦅 400+ слов/мин</span>
+                  </div>
+                </div>
+
+                <!-- Результат -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div class="text-center">
+                    <div class="text-2xl mb-2">⏱️</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-2" id="result-title">
+                      Результат расчета
+                    </h3>
+                    <p class="text-lg text-green-800" id="result-text">
+                      Выберите скорость чтения выше, чтобы увидеть результат
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Компактная таблица времени чтения -->
+      <section class="py-12">
+        <div class="container mx-auto px-4">
+          <div class="max-w-6xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="mobile-scroll">
+                <table class="w-full">
+                  <thead>
+                    <tr class="bg-slate-50">
+                      <th class="px-4 py-3 text-left font-bold text-white border-b bg-green-600">СЛОВ</th>
+                      {readingSpeeds.map(speed => (
+                        <th class="px-2 py-3 text-center font-bold text-slate-800 border-b min-w-[100px]">
+                          <div class="flex flex-col items-center">
+                            <span class="text-lg mb-1">{speed.emoji}</span>
+                            <span class="text-xs font-medium">{speed.name}</span>
+                            <span class="text-xs text-slate-600">({speed.wpm})</span>
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {wordCounts.map(count => (
+                      <tr class={`border-b hover:bg-slate-50 ${count === 250 ? 'highlight-250' : ''}`}>
+                        <td class="px-4 py-4 font-semibold text-white border-r bg-green-600">
+                          {count === 250 ? (
+                            <span class="text-blue-200 font-bold">250 ←</span>
+                          ) : (
+                            count.toLocaleString('ru-RU')
+                          )}
+                        </td>
+                        {readingSpeeds.map(speed => (
+                          <td class="px-2 py-4 text-center text-slate-700 time-cell">
+                            {count < 100 ?
+                              calculateReadingTimeSeconds(count, speed.wpm) :
+                              calculateReadingTime(count, speed.wpm)
+                            }
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Призыв к действию - переход на главную -->
+            <div class="mt-8 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8 text-center">
+              <div class="max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">
+                  🎯 Хотите рассчитать, сколько книг сможете прочитать за год?
+                </h3>
+                <p class="text-lg text-slate-700 mb-6">
+                  Используйте наш основной калькулятор на главной странице, чтобы узнать, сколько книг вы сможете прочитать за месяц, квартал или год при вашей скорости чтения!
+                </p>
+                <div class="grid md:grid-cols-3 gap-4 mb-6 text-sm">
+                  <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <div class="text-2xl mb-2">📚</div>
+                    <div class="font-semibold text-slate-900">Учитывает книги</div>
+                    <div class="text-slate-600">Среднюю длину книг</div>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <div class="text-2xl mb-2">⏰</div>
+                    <div class="font-semibold text-slate-900">Разные периоды</div>
+                    <div class="text-slate-600">Месяц, год, 10 лет</div>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <div class="text-2xl mb-2">⚡</div>
+                    <div class="font-semibold text-slate-900">Скорость чтения</div>
+                    <div class="text-slate-600">От 150 до 400+ слов/мин</div>
+                  </div>
+                </div>
+                <a href="/" class="inline-block">
+                  <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105">
+                    Перейти к основному калькулятору 🚀
+                  </button>
+                </a>
+              </div>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div class="mt-8 grid md:grid-cols-2 gap-6">
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+                  <span class="text-2xl mr-2">📚</span>
+                  Интересные факты о чтении
+                </h3>
+                <ul class="space-y-3 text-blue-800">
+                  <li>• Средняя скорость чтения взрослого человека - 200-250 слов в минуту</li>
+                  <li>• 250 слов - это примерно один абзац текста или полстраницы книги</li>
+                  <li>• При скорости 250 слов/мин вы прочитаете 250 слов за 1 минуту</li>
+                  <li>• Скорость чтения можно развивать с помощью специальных упражнений</li>
+                </ul>
+              </div>
+
+              <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-green-900 mb-4 flex items-center">
+                  <span class="text-2xl mr-2">⚡</span>
+                  Как использовать таблицу
+                </h3>
+                <ul class="space-y-3 text-green-800">
+                  <li>• Найдите нужное количество слов в первом зеленом столбце</li>
+                  <li>• Выберите скорость чтения в заголовке таблицы</li>
+                  <li>• В ячейке пересечения - точное время чтения</li>
+                  <li>• 250 слов выделены голубым цветом для быстрого поиска</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <SimpleFooter />
+
+  <!-- Структурированные данные для поисковиков -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Калькулятор времени чтения слов",
+      "description": "Бесплатный онлайн калькулятор для расчета времени чтения текста. Рассчитайте, сколько времени потребуется для чтения любого количества слов при разных скоростях чтения.",
+      "url": "https://bookscalculator.ru/skolko-vremeni-nuzhno-chtoby-prochitat-250-slov",
+      "applicationCategory": "Utility",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      },
+      "featureList": [
+        "Расчет времени чтения от 10 до 100000 слов",
+        "5 скоростей чтения от 150 до 400+ слов в минуту",
+        "Точные расчеты в секундах и минутах",
+        "Интерактивная таблица с кликабельными строками",
+        "Адаптивный дизайн для мобильных устройств"
+      ],
+      "screenshot": "https://bookscalculator.ru/images/hero-section.webp",
+      "author": {
+        "@type": "Organization",
+        "name": "BooksCalculator.ru"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BooksCalculator.ru"
+      }
+    }
+  </script>
+
+  <!-- Дополнительные мета-теги для Яндекс -->
+  <meta name="yandex-verification" content="" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <link rel="canonical" href="https://bookscalculator.ru/skolko-vremeni-nuzhno-chtoby-prochitat-250-slov" />
+
+  <!-- Оптимизации производительности -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="width" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <script>
+    // Оптимизированная typewriter анимация
+    class DynamicTitleTypewriter {
+      constructor(element, words) {
+        this.element = element;
+        this.words = words;
+        this.currentIndex = 0;
+        this.currentText = '';
+        this.isDeleting = false;
+        this.isStopped = false;
+        this.timeoutId = null;
+      }
+
+      type() {
+        if (this.isStopped) return;
+
+        const currentWord = this.words[this.currentIndex];
+
+        if (this.isDeleting) {
+          this.currentText = this.currentText.slice(0, -1);
+          this.element.textContent = this.currentText;
+
+          if (this.currentText === '') {
+            this.isDeleting = false;
+            this.currentIndex = (this.currentIndex + 1) % this.words.length;
+            this.timeoutId = setTimeout(() => this.type(), 500);
+          } else {
+            this.timeoutId = setTimeout(() => this.type(), 75);
+          }
+        } else {
+          this.currentText = currentWord.slice(0, this.currentText.length + 1);
+          this.element.textContent = this.currentText;
+
+          if (this.currentText === currentWord) {
+            this.timeoutId = setTimeout(() => {
+              this.isDeleting = true;
+              this.type();
+            }, 3000);
+          } else {
+            this.timeoutId = setTimeout(() => this.type(), 150);
+          }
+        }
+      }
+
+      stopAndFix(text) {
+        this.isStopped = true;
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+        }
+        this.element.textContent = text;
+        this.element.style.borderRight = 'none';
+      }
+
+      start() {
+        this.type();
+      }
+    }
+
+    // Оптимизированный калькулятор времени чтения
+    class ReadingTimeCalculator {
+      constructor() {
+        this.currentWords = 250;
+        this.currentSpeed = 250;
+        this.wordCounts = [10, 50, 100, 250, 500, 1000, 5000, 10000, 70000, 100000];
+        this.init();
+      }
+
+      init() {
+        this.bindEvents();
+      }
+
+      bindEvents() {
+        // Делегирование событий для строк таблицы
+        const tbody = document.querySelector('tbody');
+        if (tbody) {
+          tbody.addEventListener('click', (e) => {
+            const row = e.target.closest('tr');
+            if (row) {
+              const index = Array.from(row.parentNode.children).indexOf(row);
+              this.handleRowClick(index);
+            }
+          });
+        }
+
+        // Обработчик для слайдера с дебоунсингом
+        const calculatorSection = document.getElementById('calculator-section');
+        if (calculatorSection) {
+          const speedSlider = calculatorSection.querySelector('#speed-slider');
+          if (speedSlider) {
+            let debounceTimer;
+            speedSlider.addEventListener('input', (e) => {
+              clearTimeout(debounceTimer);
+              debounceTimer = setTimeout(() => {
+                this.currentSpeed = parseInt(e.target.value);
+                this.updateDisplay();
+                this.showResult(this.currentWords, this.currentSpeed);
+              }, 16); // ~60fps
+            });
+          }
+        }
+      }
+
+      handleRowClick(index) {
+        const words = this.wordCounts[index];
+        this.currentWords = words;
+        this.updateMainContent(words);
+        this.showCalculator();
+        this.showResult(words, this.currentSpeed);
+      }
+
+      updateMainContent(words) {
+        // Останавливаем анимацию typewriter и фиксируем заголовок
+        if (window.titleTypewriter) {
+          window.titleTypewriter.stopAndFix(`${words.toLocaleString('ru-RU')} слов?`);
+        }
+
+        // Обновляем мета-теги для SEO
+        this.updateMetaTags(words);
+
+        const description = document.getElementById('main-description');
+        if (description) {
+          description.textContent = 'Используйте слайдер выше для точного расчета';
+        }
+      }
+
+      updateMetaTags(words) {
+        // Обновляем title страницы
+        const formattedWords = words.toLocaleString('ru-RU');
+        const newTitle = `Калькулятор времени чтения ${formattedWords} слов - рассчитать за секунды`;
+        const newDescription = `Узнайте, сколько времени потребуется для чтения ${formattedWords} слов при разных скоростях чтения от 150 до 400 слов в минуту. Точный расчет времени чтения онлайн.`;
+
+        // Обновляем мета-теги в head
+        document.title = newTitle;
+
+        // Обновляем Open Graph мета-теги
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+
+        if (ogTitle) ogTitle.setAttribute('content', newTitle);
+        if (ogDescription) ogDescription.setAttribute('content', newDescription);
+
+        // Обновляем Twitter Card мета-теги
+        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+
+        if (twitterTitle) twitterTitle.setAttribute('content', newTitle);
+        if (twitterDescription) twitterDescription.setAttribute('content', newDescription);
+
+        // Обновляем канонический URL с параметрами
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (canonicalLink) {
+          const baseUrl = canonicalLink.href.split('?')[0];
+          canonicalLink.href = `${baseUrl}?words=${words}`;
+        }
+      }
+
+      showCalculator() {
+        const calculatorSection = document.getElementById('calculator-section');
+        if (calculatorSection && calculatorSection.classList.contains('hidden')) {
+          calculatorSection.classList.remove('hidden');
+          calculatorSection.style.animation = 'fadeInUp 0.6s ease-out';
+        }
+      }
+
+      showResult(words, speed) {
+        const calculatorSection = document.getElementById('calculator-section');
+        const resultTitle = calculatorSection?.querySelector('#result-title');
+        const resultText = calculatorSection?.querySelector('#result-text');
+
+        if (resultTitle && resultText) {
+          const timeResult = this.calculateTime(words, speed);
+          resultTitle.textContent = `Результат для ${words.toLocaleString('ru-RU')} слов`;
+          resultText.textContent = `Вы прочитаете ${words.toLocaleString('ru-RU')} слов за ${timeResult} при скорости ${speed} слов/мин`;
+        }
+      }
+
+      calculateTime(words, speed) {
+        if (words < 100) {
+          const totalSeconds = Math.ceil((words / speed) * 60);
+          return totalSeconds < 60
+            ? `${totalSeconds} сек`
+            : `${Math.floor(totalSeconds / 60)} мин ${totalSeconds % 60 || ''} сек`.trim();
+        } else {
+          const minutes = Math.ceil(words / speed);
+          const hours = Math.floor(minutes / 60);
+          const remainingMinutes = minutes % 60;
+
+          if (hours === 0) {
+            return remainingMinutes === 0 ? '0 мин' : `${remainingMinutes} мин`;
+          } else if (remainingMinutes === 0) {
+            return `${hours} ч`;
+          } else {
+            return `${hours} ч ${remainingMinutes} мин`;
+          }
+        }
+      }
+
+      updateDisplay() {
+        const calculatorSection = document.getElementById('calculator-section');
+        const currentSpeedDisplay = calculatorSection?.querySelector('#current-speed');
+        if (currentSpeedDisplay) {
+          currentSpeedDisplay.textContent = `${this.currentSpeed} слов/мин`;
+        }
+      }
+    }
+
+    // Оптимизированная инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      // Используем requestIdleCallback для не критичных задач
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(initPage);
+      } else {
+        // Fallback для старых браузеров
+        setTimeout(initPage, 1);
+      }
+    });
+
+    function initPage() {
+      // Инициализация typewriter анимации
+      const dynamicElement = document.getElementById('dynamic-words');
+      if (dynamicElement) {
+        const typewriter = new DynamicTitleTypewriter(dynamicElement, [
+          "100 слов?",
+          "250 слов?",
+          "500 слов?",
+          "1,000 слов?",
+          "5,000 слов?"
+        ]);
+        typewriter.start();
+        window.titleTypewriter = typewriter;
+      }
+
+      // Инициализация калькулятора
+      new ReadingTimeCalculator();
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+
+const wordsToPagesData = [
+    { words: 100, pages: '0.2 страницы', isGreen: true },
+  { words: 200, pages: '0.4 страницы', isGreen: true },
+  { words: 300, pages: '0.6 страницы', isGreen: true },
+  { words: 400, pages: '0.8 страницы', isGreen: false },
+  { words: 500, pages: '1 страница', isGreen: false },
+  { words: 600, pages: '1.2 страницы', isGreen: false },
+  { words: 700, pages: '1.4 страницы', isGreen: false },
+  { words: 800, pages: '1.6 страницы', isGreen: false },
+  { words: 900, pages: '1.8 страницы', isGreen: false },
+  { words: 1000, pages: '2 страницы', isGreen: false },
+  { words: 1250, pages: '2.5 страницы', isGreen: false },
+  { words: 1500, pages: '3 страницы', isGreen: false },
+  { words: 2000, pages: '4 страницы', isGreen: false },
+  { words: 2500, pages: '5 страниц', isGreen: false },
+  { words: 3000, pages: '6 страниц', isGreen: false },
+  { words: 3500, pages: '7 страниц', isGreen: false },
+  { words: 4000, pages: '8 страниц', isGreen: false },
+  { words: 4500, pages: '9 страниц', isGreen: false },
+  { words: 5000, pages: '10 страниц', isGreen: false }
+
+];
+
+const calculationParams = {
+  font: "12 кегль Times New Roman",
+  spacing: "полуторный интервал",
+  wordsPerPage: "500 слов на страницу"
+};
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Сколько страниц 4500 слов? Калькулятор страниц"
+    description="4500 слов = 9 страниц. Рассчитайте, сколько страниц займут ваши тексты с помощью интерактивного калькулятора страниц для текста."
+    keywords="сколько страниц 4500 слов, 4500 слов сколько страниц, калькулятор страниц для текста, расчет страниц"
+  />
+
+  <style>
+    .typewriter-text {
+      border-right: 3px solid #10b981;
+      animation: blink 1s infinite;
+      display: inline-block;
+    }
+
+    .typewriter-text.green {
+      color: #10b981 !important;
+      font-weight: 700;
+    }
+
+    @keyframes blink {
+      0%, 50% { border-color: #10b981; }
+      51%, 100% { border-color: transparent; }
+    }
+
+    .answer-text {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #059669;
+      margin-top: 1rem;
+    }
+
+    .answer-text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .words-table {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .table-header {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+    }
+
+    .table-row {
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+      padding: 0.75rem 1rem;
+    }
+
+    .table-row:hover {
+      background: rgba(16, 185, 129, 0.05);
+      transform: translateX(4px);
+    }
+
+    .table-row.clickable:active {
+      transform: translateX(2px);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .words-cell {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      font-weight: 600;
+      color: #0369a1;
+      padding: 0.75rem 0.5rem;
+    }
+
+    .pages-cell {
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 0.2s ease;
+      padding: 0.75rem 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .words-table {
+        font-size: 0.875rem;
+      }
+
+      .table-row {
+        padding: 0.5rem 0.75rem;
+      }
+
+      .words-cell {
+        padding: 0.5rem 0.25rem;
+      }
+
+      .pages-cell {
+        padding: 0.5rem 0.25rem;
+      }
+
+      .typewriter-text {
+        border-right: none;
+      }
+    }
+
+    .info-block {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .params-block {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1px solid #22c55e;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <!-- Hero секция с фиксированным заголовком для 4500 слов -->
+      <section class="hero-section py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">
+              Сколько страниц
+              <span class="typewriter-text ">4500 слов?</span>
+            </h1>
+            <!-- Контейнер для ответа -->
+            <div class="answer-text show">Ответ: 4500 слов = 9 страниц</div>
+            <p class="text-xl md:text-2xl text-slate-600 mt-8">
+              Нажмите на любую строку в таблице ниже, чтобы увидеть результат!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Параметры расчета -->
+      <section class="py-6">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="params-block text-center">
+              <h3 class="text-lg font-semibold text-green-900 mb-3">📏 Параметры расчета</h3>
+              <div class="grid md:grid-cols-3 gap-4 text-green-800">
+                <div>
+                  <div class="font-semibold">Шрифт</div>
+                  <div class="text-sm">{calculationParams.font}</div>
+                </div>
+                <div>
+                  <div class="font-semibold">Интервал</div>
+                  <div class="text-sm">{calculationParams.spacing}</div>
+                </div>
+                <div>
+                  <div class="font-semibold">Слов на странице</div>
+                  <div class="text-sm">{calculationParams.wordsPerPage}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Интерактивная таблица -->
+      <section class="py-12">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="words-table">
+              <div class="table-header p-4">
+                <div class="grid grid-cols-2 gap-4 text-center">
+                  <div class="font-bold text-lg">Количество слов</div>
+                  <div class="font-bold text-lg">Страниц</div>
+                </div>
+              </div>
+
+              <div id="words-table-body">
+                {wordsToPagesData.map((item, index) => (
+                  <a href={`/skolko-stranic-${item.words}-slov`}
+                     class="table-row-link">
+                    <div
+                      class="table-row grid grid-cols-2 gap-4 p-4 clickable"
+                      data-words={item.words}
+                      data-pages={item.pages}
+                    >
+                      <div class={`words-cell text-center text-lg ${item.isGreen ? 'text-green-600 font-bold' : ''}`}>
+                        {item.words.toLocaleString('ru-RU')} слов
+                      </div>
+                      <div class="pages-cell text-center text-lg font-medium py-3">
+                        {item.pages}
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div class="mt-6 grid md:grid-cols-3 gap-4">
+               <div class="info-block">
+                 <h3 class="text-lg font-semibold text-blue-900 mb-3">📚 Стандартные объемы</h3>
+                 <ul class="space-y-2 text-blue-800 text-sm">
+                   <li>• Короткий рассказ: 100-500 слов</li>
+                   <li>• Эссе: 500-1000 слов</li>
+                   <li>• Повесть: 20.000-50.000 слов</li>
+                   <li>• Роман: 60.000+ слов</li>
+                 </ul>
+               </div>
+
+               <div class="info-block">
+                 <h3 class="text-lg font-semibold text-green-900 mb-3">⚡ Быстрый расчет</h3>
+                 <ul class="space-y-2 text-green-800 text-sm">
+                   <li>• 100 слов ≈ 1 абзац текста</li>
+                   <li>• 500 слов ≈ 1 страница книги</li>
+                   <li>• 1000 слов ≈ 2 страницы книги</li>
+                   <li>• 2500 слов ≈ 5 страниц книги</li>
+                   <li>• 5000 слов ≈ 10 страниц книги</li>
+                 </ul>
+               </div>
+
+               <div class="info-block">
+                 <h3 class="text-lg font-semibold text-purple-900 mb-3">🔗 Популярные расчеты</h3>
+                 <ul class="space-y-2 text-purple-800 text-sm">
+                   <li><a href="/skolko-stranic-100-slov" class="hover:text-purple-600 underline">100 слов</a> - 0.2 страницы</li>
+                   <li><a href="/skolko-stranic-200-slov" class="hover:text-purple-600 underline">200 слов</a> - 0.4 страницы</li>
+                   <li><a href="/skolko-stranic-500-slov" class="hover:text-purple-600 underline">500 слов</a> - 1 страница</li>
+                   <li><a href="/skolko-stranic-1000-slov" class="hover:text-purple-600 underline">1000 слов</a> - 2 страницы</li>
+                   <li><a href="/skolko-stranic-5000-slov" class="hover:text-purple-600 underline">5000 слов</a> - 10 страниц</li>
+                 </ul>
+               </div>
+             </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+       <!-- Навигация между связанными страницами -->
+       <section class="py-8 bg-gradient-to-r from-purple-50 to-blue-50">
+         <div class="container mx-auto px-4">
+           <div class="max-w-4xl mx-auto">
+             <h2 class="text-2xl font-bold text-center text-slate-900 mb-6">🔗 Другие расчеты страниц</h2>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+               <a href="/skolko-stranic-100-slov" class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-200 hover:scale-105 text-center border border-purple-200">
+                 <div class="text-2xl font-bold text-purple-600">100 слов</div>
+                 <div class="text-sm text-slate-600">= 0.2 страницы</div>
+               </a>
+               <a href="/skolko-stranic-200-slov" class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-200 hover:scale-105 text-center border border-blue-200">
+                 <div class="text-2xl font-bold text-blue-600">200 слов</div>
+                 <div class="text-sm text-slate-600">= 0.4 страницы</div>
+               </a>
+               <a href="/skolko-stranic-500-slov" class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-200 hover:scale-105 text-center border border-green-200">
+                 <div class="text-2xl font-bold text-green-600">500 слов</div>
+                 <div class="text-sm text-slate-600">= 1 страница</div>
+               </a>
+             </div>
+             <div class="text-center mt-6">
+               <a href="/skolko-stranic-5000-slov" class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200">
+                 Посмотреть все расчеты →
+               </a>
+             </div>
+           </div>
+         </div>
+       </section>
+
+       <!-- Призыв к действию -->
+      <section class="cta-section py-16 bg-gradient-to-r from-blue-50 to-green-50">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-blue-200">
+              <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+                🚀 Подсчитайте скорость чтения
+              </h2>
+              <p class="text-xl text-slate-600 mb-8">
+                Теперь, когда вы знаете, сколько страниц займут ваши тексты, узнайте, за сколько времени вы сможете их прочитать!
+              </p>
+
+              <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/" class="inline-block">
+                  <button class="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105">
+                    🚀 Калькулятор чтения книг
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <QuoteBlock />
+  <SimpleFooter />
+
+  <!-- SEO мета-теги для социальных сетей -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Сколько страниц 4500 слов? Калькулятор страниц">
+  <meta property="og:description" content="4500 слов = 9 страниц. Интерактивная таблица расчета количества страниц для текста.">
+  <meta property="og:url" content="https://bookscalculator.ru/skolko-stranic-4500-slov">
+  <meta property="og:site_name" content="BooksCalculator.ru">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Сколько страниц 4500 слов? Калькулятор страниц">
+  <meta name="twitter:description" content="4500 слов = 9 страниц. Интерактивная таблица расчета количества страниц для текста">
+
+  <!-- Структурированные данные Schema.org -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Сколько страниц 4500 слов? Калькулятор страниц",
+      "description": "4500 слов = 9 страниц. Интерактивная таблица для расчета количества страниц по количеству слов",
+      "url": "https://bookscalculator.ru/skolko-stranic-4500-slov",
+      "applicationCategory": "Utility",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      }
+    }
+  </script>
+</BaseLayout>
+
+<script>
+  // Инициализация страницы калькулятора
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('📊 Words to Pages calculator loaded');
+
+    // Добавляем обработчик для подсветки строк при наведении
+    const tableRowLinks = document.querySelectorAll('.table-row-link');
+    tableRowLinks.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        this.querySelector('.table-row').style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+      });
+
+      link.addEventListener('mouseleave', function() {
+        this.querySelector('.table-row').style.backgroundColor = '';
+      });
+    });
+  });
+</script>
+
+<style>
+  .hero-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .table-row {
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .words-table {
+      margin: 0 -1rem;
+      border-radius: 0;
+    }
+
+    .table-header,
+    .table-row {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .answer-text {
+      font-size: 1.25rem;
+    }
+  }
+</style>

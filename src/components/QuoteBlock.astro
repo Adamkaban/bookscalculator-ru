@@ -1,0 +1,42 @@
+---
+import { getRandomQuote } from '../data/quotes.js';
+
+const quote = getRandomQuote();
+---
+
+<div class="quote-block my-16 mx-auto max-w-2xl">
+  <div class="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 border-l-4 border-blue-600">
+    <div class="relative">
+      <span class="quote-mark text-6xl text-blue-600 absolute -top-4 -left-2 leading-none">"</span>
+      <blockquote class="text-lg italic text-slate-800 leading-relaxed mb-4 pl-8">
+        {quote.text}
+      </blockquote>
+      <footer class="text-right">
+        <cite class="text-base font-semibold text-slate-600 not-italic">
+          — {quote.author}
+        </cite>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quote-block {
+    animation: fadeInScale 0.8s ease-out;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .quote-mark {
+    font-family: Georgia, serif;
+  }
+</style>

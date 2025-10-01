@@ -1,0 +1,537 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import TypewriterText from '../components/TypewriterText.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+---
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Калькулятор времени чтения книг"
+    description="Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие с нашим удобным калькулятором времени чтения"
+    keywords="калькулятор чтения, время чтения книг, скорость чтения, книги в год, планирование чтения"
+    image="/images/hero-section.webp"
+  />
+
+  <Header />
+
+  <main>
+    <!-- Hero секция с изображением во всю ширину и текстом поверх -->
+    <section class="hero-section relative py-16">
+      <!-- Фоновая картинка во всю ширину -->
+      <div class="absolute inset-0">
+        <img
+          src="/images/hero-section.webp"
+          alt="Книги и чтение"
+          class="w-full h-full object-cover"
+          loading="eager"
+          width="1200"
+          height="400"
+        />
+        <!-- Тёмный оверлей для лучшей читаемости текста -->
+        <div class="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      <!-- Контент поверх картинки -->
+      <div class="relative container mx-auto px-4 min-h-[60vh] flex items-center">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+            Узнайте, сколько книг вы сможете прочитать за
+            <span id="typewriter" class="inline-block text-slate-300 ml-1">
+              неделю? месяц? год?
+            </span>
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Калькулятор -->
+    <section class="calculator-section py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+
+          <div class="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl shadow-xl p-8 md:p-12">
+            <h3 class="text-2xl font-semibold text-slate-900 mb-8 text-center">
+              Рассчитайте, сколько книг вы сможете прочитать при разных условиях
+            </h3>
+
+            <!-- Интерактивный калькулятор -->
+            <div class="calculator-form grid md:grid-cols-3 gap-6 mb-8">
+              <!-- Время чтения в день -->
+              <div class="form-group">
+                <label for="minutes-per-day" class="block text-sm font-medium text-slate-700 mb-2">
+                  ⏰ Время чтения в день
+                </label>
+                <select id="minutes-per-day" class="w-full p-4 border-2 border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400 hover:shadow-md hover:scale-105">
+                  <option value="">Выберите время</option>
+                  <option value="5">5 минут</option>
+                  <option value="10">10 минут</option>
+                  <option value="15">15 минут</option>
+                  <option value="20">20 минут</option>
+                  <option value="25">25 минут</option>
+                  <option value="30">30 минут</option>
+                  <option value="40">40 минут</option>
+                  <option value="50">50 минут</option>
+                  <option value="60">1 час</option>
+                  <option value="120">2 часа</option>
+                  <option value="300">5 часов</option>
+                </select>
+              </div>
+
+              <!-- Скорость чтения -->
+              <div class="form-group">
+                <label for="reading-speed" class="block text-sm font-medium text-slate-700 mb-2">
+                  🚀 Скорость чтения
+                </label>
+                <select id="reading-speed" class="w-full p-4 border-2 border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400 hover:shadow-md hover:scale-105">
+                  <option value="">Выберите скорость</option>
+                  <option value="150">🐌 Очень медленно (150 слов/мин)</option>
+                  <option value="200">🐢 Медленно (200 слов/мин)</option>
+                  <option value="250">🐒 Средне (250 слов/мин)</option>
+                  <option value="325">🐆 Быстро (325 слов/мин)</option>
+                  <option value="400">🦅 Очень быстро (400+ слов/мин)</option>
+                  <option value="unknown">Не знаю 🙄</option>
+                </select>
+              </div>
+
+              <!-- Временной период -->
+              <div class="form-group">
+                <label for="time-period" class="block text-sm font-medium text-slate-700 mb-2">
+                  📅 Временной период
+                </label>
+                <select id="time-period" class="w-full p-4 border-2 border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-blue-400 hover:shadow-md hover:scale-105">
+                  <option value="">Выберите период</option>
+                  <option value="1 месяц">1 месяц</option>
+                  <option value="3 месяца">3 месяца</option>
+                  <option value="6 месяцев">6 месяцев</option>
+                  <option value="1 год">1 год</option>
+                  <option value="10 лет">10 лет</option>
+                  <option value="50 лет">50 лет</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Кнопка расчета -->
+            <div class="text-center mb-8">
+              <button id="calculate-button" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                Рассчитать! ✨
+              </button>
+            </div>
+
+            <!-- Результаты -->
+            <div id="calculator-results" class="results-container">
+              <!-- Результаты будут появляться здесь -->
+            </div>
+
+            <!-- Альтернативный контент для "Не знаю" -->
+            <div id="speed-test-container" class="text-center mt-6 hidden">
+              <p class="text-slate-700 mb-4">
+                Хотите улучшить скорость чтения, память, внимание и мышление? Попробуйте онлайн-тренажер.
+              </p>
+              <a href="https://my.saleads.pro/s/sb8Jr/51?erid=2VtzquoPH4R" rel="nofollow" target="_blank" class="inline-block">
+                <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105">
+                  Попробовать 🚀
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Дополнительная информация -->
+    <section class="info-section py-16 bg-slate-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">
+            Зачем нужен этот калькулятор?
+          </h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-4xl mb-4">🎯</div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-3">Планирование</h3>
+              <p class="text-slate-600">Поставьте реалистичные цели по чтению на год</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-4xl mb-4">📊</div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-3">Анализ</h3>
+              <p class="text-slate-600">Узнайте свою скорость чтения и возможности</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-4xl mb-4">⏰</div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-3">Экономия времени</h3>
+              <p class="text-slate-600">Оптимизируйте свое время для большего количества книг</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SimpleFooter />
+</BaseLayout>
+
+<script>
+  // Typewriter анимация для части заголовка
+  class Typewriter {
+    constructor(element, words) {
+      this.element = element;
+      this.words = words; // Массив отдельных слов
+      this.currentWordIndex = 0;
+      this.currentText = '';
+      this.isDeleting = false;
+      this.typingSpeed = 100;
+      this.deletingSpeed = 50;
+      this.pauseBetweenWords = 2000;
+      this.pauseBetweenCycles = 500;
+    }
+
+    async type() {
+      const currentWord = this.words[this.currentWordIndex];
+
+      if (this.isDeleting) {
+        // Удаляем текст посимвольно
+        this.currentText = this.currentText.substring(0, this.currentText.length - 1);
+        this.element.textContent = this.currentText;
+
+        if (this.currentText === '') {
+          this.isDeleting = false;
+          this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+          setTimeout(() => this.type(), this.pauseBetweenCycles);
+        } else {
+          setTimeout(() => this.type(), this.deletingSpeed);
+        }
+      } else {
+        // Добавляем текст посимвольно
+        this.currentText = currentWord.substring(0, this.currentText.length + 1);
+        this.element.textContent = this.currentText;
+
+        if (this.currentText === currentWord) {
+          // Слово напечатано полностью
+          setTimeout(() => {
+            this.isDeleting = true;
+            this.type();
+          }, this.pauseBetweenWords);
+        } else {
+          setTimeout(() => this.type(), this.typingSpeed);
+        }
+      }
+    }
+
+    start() {
+      this.type();
+    }
+  }
+
+  // Запускаем анимацию после загрузки страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const element = document.getElementById('typewriter');
+    if (element) {
+      const typewriter = new Typewriter(element, [
+        "неделю?",
+        "месяц?",
+        "год?",
+        "жизнь?"
+      ]);
+      typewriter.start();
+    }
+
+    // Инициализация калькулятора
+    initCalculator();
+
+    // Показываем кнопку теста скорости при выборе "Не знаю"
+    const speedSelect = document.getElementById('reading-speed');
+    const speedTestContainer = document.getElementById('speed-test-container');
+
+    if (speedSelect && speedTestContainer) {
+      speedSelect.addEventListener('change', function() {
+        if (this.value === 'unknown') {
+          speedTestContainer.classList.remove('hidden');
+        } else {
+          speedTestContainer.classList.add('hidden');
+        }
+      });
+
+ // Функции калькулятора
+ function calculateReading(minutesPerDay, wordsPerMinute, timePeriod) {
+        if (!minutesPerDay || !wordsPerMinute || !timePeriod) {
+          return null;
+        }
+    
+        // Определяем количество дней в периоде
+        const daysInPeriod = getDaysInPeriod(timePeriod);
+    
+        // Считаем слова в день
+        const wordsPerDay = (minutesPerDay * wordsPerMinute);
+    
+        // Считаем общее количество слов за период
+        const totalWords = wordsPerDay * daysInPeriod;
+    
+        // Средняя книга ~60,000 слов
+        const averageBookWords = 60000;
+        const booksRead = Math.floor(totalWords / averageBookWords);
+    
+        // Дополнительные метрики
+        const totalMinutes = minutesPerDay * daysInPeriod;
+        const totalHours = Math.floor(totalMinutes / 60);
+        const remainingMinutes = totalMinutes % 60;
+    
+        return {
+          books: booksRead,
+          totalWords: totalWords,
+          totalMinutes: totalMinutes,
+          totalHours: totalHours,
+          remainingMinutes: remainingMinutes,
+          wordsPerDay: wordsPerDay,
+          daysInPeriod: daysInPeriod
+        };
+      }
+    
+      function getDaysInPeriod(period) {
+        const periodDays = {
+          '1 месяц': 30,
+          '3 месяца': 90,
+          '6 месяцев': 180,
+          '1 год': 365,
+          '10 лет': 3650,
+          '50 лет': 18250
+        };
+        return periodDays[period] || 365;
+      }
+    
+      function formatNumber(num) {
+        return num.toLocaleString('ru-RU');
+      }
+    
+      function animateNumber(element, target, duration = 1000) {
+        const start = 0;
+        const startTime = performance.now();
+    
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+    
+          // Easing function (ease-out)
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(start + (target - start) * easeOut);
+    
+          element.textContent = formatNumber(current);
+    
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            element.textContent = formatNumber(target);
+          }
+        }
+    
+        requestAnimationFrame(update);
+      }
+    
+      function displayResults(results) {
+        const container = document.getElementById('calculator-results');
+        if (!container) return;
+    
+        container.innerHTML = `
+          <div class="results-grid grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="result-item bg-white rounded-lg p-6 shadow-sm border border-slate-200 text-center">
+              <div class="text-3xl mb-2">📚</div>
+              <div class="text-2xl font-bold text-blue-600 mb-1" id="books-count">0</div>
+              <div class="text-sm text-slate-600">книг прочитаете</div>
+            </div>
+            <div class="result-item bg-white rounded-lg p-6 shadow-sm border border-slate-200 text-center">
+              <div class="text-3xl mb-2">📖</div>
+              <div class="text-2xl font-bold text-green-600 mb-1" id="words-count">0</div>
+              <div class="text-sm text-slate-600">слов прочитаете</div>
+            </div>
+            <div class="result-item bg-white rounded-lg p-6 shadow-sm border border-slate-200 text-center">
+              <div class="text-3xl mb-2">⏰</div>
+              <div class="text-2xl font-bold text-purple-600 mb-1" id="hours-count">0</div>
+              <div class="text-sm text-slate-600">часов потратите</div>
+            </div>
+            <div class="result-item bg-white rounded-lg p-6 shadow-sm border border-slate-200 text-center">
+              <div class="text-3xl mb-2">📅</div>
+              <div class="text-2xl font-bold text-orange-600 mb-1" id="days-count">0</div>
+              <div class="text-sm text-slate-600">дней в периоде</div>
+            </div>
+          </div>
+        `;
+
+        // Анимируем числа
+        setTimeout(() => {
+          animateNumber(document.getElementById('books-count'), results.books);
+          animateNumber(document.getElementById('words-count'), Math.floor(results.totalWords));
+          animateNumber(document.getElementById('hours-count'), results.totalHours);
+          animateNumber(document.getElementById('days-count'), results.daysInPeriod);
+        }, 100);
+
+        // Показываем рекламу тренажера после результатов
+        setTimeout(() => {
+          const resultsContainer = document.getElementById('calculator-results');
+          if (resultsContainer) {
+            const promoDiv = document.createElement('div');
+            promoDiv.className = 'mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200';
+            promoDiv.innerHTML = `
+              <div class="text-center">
+                <p class="text-slate-700 mb-4 text-lg">
+                  Хотите читать быстрее и запоминать больше? Попробуйте нейроупражнения, мнемотехники,
+                  майнд-карты, скорочтение и многое другое на своем опыте!
+                </p>
+                <a href="https://my.saleads.pro/s/sb8Jr/51?erid=2VtzquoPH4R" rel="nofollow" target="_blank" class="inline-block">
+                  <button class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105">
+                    Улучшить навыки 🚀
+                  </button>
+                </a>
+              </div>
+            `;
+            resultsContainer.appendChild(promoDiv);
+          }
+        }, 1500); // Показываем через 1.5 секунды после анимации чисел
+      }
+    }
+
+    // Глобальная функция инициализации калькулятора
+    function initCalculator() {
+      const calculateButton = document.getElementById('calculate-button');
+      const minutesSelect = document.getElementById('minutes-per-day');
+      const speedSelect = document.getElementById('reading-speed');
+      const periodSelect = document.getElementById('time-period');
+      const speedTestButton = document.getElementById('speed-test-button');
+
+
+      // Обработчик кнопки "Рассчитать"
+      if (calculateButton) {
+        calculateButton.addEventListener('click', () => {
+          // Добавляем визуальную обратную связь
+          calculateButton.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            calculateButton.style.transform = 'scale(1)';
+          }, 150);
+
+          const minutes = minutesSelect.value;
+          const speed = speedSelect.value;
+          const period = periodSelect.value;
+
+          if (!minutes || !speed || !period) {
+            alert('Пожалуйста, заполните все поля!');
+            return;
+          }
+
+          const results = calculateReading(parseInt(minutes), parseInt(speed), period);
+          if (results) {
+            displayResults(results);
+          }
+        });
+      }
+
+
+      // Обработчик кнопки (теперь ведет на тренажер)
+      if (speedTestButton) {
+        speedTestButton.addEventListener('click', () => {
+          window.open('https://my.saleads.pro/s/sb8Jr/51?erid=2VtzquoPH4R', '_blank', 'noopener,noreferrer');
+        });
+      }
+    }
+  });
+</script>
+
+<style>
+  .hero-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  }
+
+  .calculator-placeholder {
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+  }
+
+  /* Анимация мигания курсора */
+  #typewriter {
+    border-right: 2px solid #cbd5e1;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { border-color: #cbd5e1; }
+    51%, 100% { border-color: transparent; }
+  }
+
+  /* Убираем мигающий курсор на мобильных */
+  @media (max-width: 768px) {
+    #typewriter {
+      border-right: none;
+    }
+  }
+
+  /* Стили для калькулятора */
+  .calculator-form {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .form-group select:hover {
+    border-color: #3b82f6;
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  @keyframes wiggle {
+    0%, 7% {
+      transform: rotateZ(0);
+    }
+    15% {
+      transform: rotateZ(-15deg);
+    }
+    20% {
+      transform: rotateZ(10deg);
+    }
+    25% {
+      transform: rotateZ(-10deg);
+    }
+    30% {
+      transform: rotateZ(6deg);
+    }
+    35% {
+      transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+      transform: rotateZ(0);
+    }
+  }
+
+  .result-item {
+    transition: transform 0.2s ease;
+  }
+
+  .result-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .results-grid {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+
+  /* Адаптивность для мобильных */
+  @media (max-width: 768px) {
+    .calculator-form {
+      grid-template-columns: 1fr;
+    }
+
+    .results-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+}
+
+const {
+  title = "Калькулятор времени чтения книг",
+  description = "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие с нашим удобным калькулятором времени чтения",
+  keywords = "калькулятор чтения, время чтения книг, скорость чтения, книги в год, планирование чтения",
+  image = "/images/hero-section.webp",
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author
+} = Astro.props;
+
+// Канонический URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- Основные мета-теги -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author || "BooksCalculator.ru"} />
+<meta name="robots" content="index, follow" />
+
+<!-- Канонический URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content="BookCalculator.ru" />
+<meta property="og:image" content={new URL(image, Astro.site)} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:locale" content="ru_RU" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(image, Astro.site)} />
+<meta name="twitter:image:alt" content={title} />
+
+<!-- Schema.org разметка -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": type === 'article' ? "Article" : "WebSite",
+    "name": title,
+    "description": description,
+    "url": canonicalURL,
+    "inLanguage": "ru-RU",
+    "copyrightHolder": {
+      "@type": "Organization",
+      "name": "BooksCalculator.ru"
+    },
+    ...(author && {
+      "author": {
+        "@type": "Person",
+        "name": author
+      }
+    }),
+    ...(publishedTime && { "datePublished": publishedTime }),
+    ...(modifiedTime && { "dateModified": modifiedTime })
+  }
+</script>
+
+<!-- Предзагрузка важных ресурсов -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Фавиконки (пока базовые, можно добавить позже) -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" href="/favicon.png" />

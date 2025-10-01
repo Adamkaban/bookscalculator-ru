@@ -1,0 +1,19 @@
+{
+  "name": "bookscalculator-ru",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate-books": "node scripts/generateBookPages.js"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.14.1",
+    "tailwindcss": "^3.4.17"
+  }
+}

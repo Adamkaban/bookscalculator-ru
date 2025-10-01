@@ -1,0 +1,65 @@
+---
+const currentYear = new Date().getFullYear();
+const socialLinks = [
+  { name: 'Email', href: 'mailto:joe_baker353087@yahoo.com', icon: 'email' }
+];
+---
+
+<footer class="bg-slate-900 text-slate-300">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Копирайт и социальные сети -->
+    <div class="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-slate-800">
+      <!-- Копирайт -->
+      <div class="text-center md:text-left mb-4 md:mb-0">
+        <p class="text-sm">
+          © {currentYear} BooksCalculator.ru. Все права защищены.
+        </p>
+        <p class="text-xs text-slate-400 mt-1">
+          Калькулятор для любителей чтения и планирования времени
+        </p>
+      </div>
+
+      <!-- Социальные сети -->
+      <div class="flex items-center space-x-4">
+        <span class="text-sm text-slate-400">Неточные данные или баг? Сообщите</span>
+        <div class="flex space-x-3">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              class="text-slate-400 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-slate-800"
+              aria-label={social.name}
+              target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
+              rel={social.href.startsWith('mailto:') ? '' : 'noopener noreferrer'}
+            >
+              {social.icon === 'vk' && (
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 1.627-2.949.814 0 1.154.62 1.154 1.729v2.563c0 .685.363 1.054.966 1.054.42 0 .785-.074.978-.261.588-.566.797-1.469.797-2.42 0-1.646-.679-2.666-1.734-3.29-.549-.323-1.28-.536-2.121-.536-1.743 0-3.02.953-3.02 2.539 0 .571.049 1.084.154 1.499-.885-.26-1.82-.781-2.589-1.588C8.856 15.81 8 14.287 8 12.866c0-1.42.956-2.686 2.646-3.24-.126-.5-.2-1.163-.2-1.817 0-1.154.357-2.323 1.006-3.174.651-.852 1.573-1.297 2.642-1.297.906 0 1.71.333 2.318.955.608.622.971 1.492.971 2.503 0 .574-.049 1.084-.154 1.499.885.26 1.82.781 2.589 1.588 1.269 1.333 2.035 2.856 2.035 4.277 0 1.42-.956 2.686-2.646 3.24.126.5.2 1.163.2 1.817 0 1.154-.357 2.323-1.006 3.174-.651.852-1.573 1.297-2.642 1.297-.906 0-1.71-.333-2.318-.955-.608-.622-.971-1.492-.971-2.503 0-.574.049-1.084.154-1.499z"/>
+                </svg>
+              )}
+              {social.icon === 'tg' && (
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+              )}
+              {social.icon === 'email' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Дополнительная информация -->
+    <div class="border-t border-slate-800 mt-6 pt-6 text-center">
+      <p class="text-xs text-slate-400">
+        Создано с ❤️ для любителей чтения
+      </p>
+      <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
+        Сайт не собирает персональные данные, не использует файлы cookie и не отслеживает действия посетителей
+      </p>
+    </div>
+  </div>
+</footer>

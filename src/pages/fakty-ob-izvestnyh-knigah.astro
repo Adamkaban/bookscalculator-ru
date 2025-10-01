@@ -1,0 +1,382 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Интересные факты об известных книгах - время чтения и статистика"
+    description="Узнайте интересные факты о знаменитых книгах, их объеме и времени чтения. Статистика и расчеты для популярных произведений"
+    keywords="факты о книгах, известные книги, время чтения книг, статистика чтения"
+  />
+
+  <style>
+    /* Визуальное выделение подзаголовков */
+    h2 {
+      background: #f8fafc !important;
+      border-bottom: 4px solid #3b82f6 !important;
+      padding: 1rem !important;
+      margin: 2rem 0 1rem 0 !important;
+      border-radius: 8px 8px 0 0 !important;
+      font-weight: 700 !important;
+    }
+
+    h3 {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 0.75rem !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.25rem !important;
+        padding: 0.75rem !important;
+      }
+
+      h3 {
+        font-size: 1.125rem !important;
+        padding: 0.5rem !important;
+      }
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Интересные факты об известных книгах
+            </h1>
+            <p class="text-xl text-slate-600">
+              Узнайте, сколько времени уйдет на чтение ваших любимых произведений
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Основной контент -->
+      <section class="py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="prose prose-lg prose-slate max-w-none">
+
+              <h2>Классика русской литературы</h2>
+              <p>
+                Начнем с величайших произведений русской литературы, которые должен прочитать
+                каждый образованный человек. Эти книги не только имеют огромную культурную ценность,
+                но и требуют значительного времени на прочтение.
+              </p>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4">📖 Война и мир - Лев Толстой</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📊 Технические характеристики:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Объем:</strong> ~1300 страниц</li>
+                      <li><strong>Количество слов:</strong> ~560,000 слов</li>
+                      <li><strong>Время чтения:</strong> 32-40 часов</li>
+                      <li><strong>Скорость чтения:</strong> 250 слов/мин</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📚 Историческая справка:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Годы написания:</strong> 1863-1869 (6 лет)</li>
+                      <li><strong>Первая публикация:</strong> 1869 год</li>
+                      <li><strong>Жанр:</strong> Исторический роман-эпопея</li>
+                      <li><strong>Действие:</strong> Россия, 1805-1812 годы</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4">🔍 Преступление и наказание - Фёдор Достоевский</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📊 Технические характеристики:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Объем:</strong> ~670 страниц</li>
+                      <li><strong>Количество слов:</strong> ~211,000 слов</li>
+                      <li><strong>Время чтения:</strong> 14-16 часов</li>
+                      <li><strong>Скорость чтения:</strong> 250 слов/мин</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📚 Историческая справка:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Год написания:</strong> 1866</li>
+                      <li><strong>Первая публикация:</strong> Журнал "Русский вестник"</li>
+                      <li><strong>Жанр:</strong> Психологический роман</li>
+                      <li><strong>Тираж:</strong> Первое издание разошлось мгновенно</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4">🎭 Мастер и Маргарита - Михаил Булгаков</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📊 Технические характеристики:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Объем:</strong> ~400 страниц</li>
+                      <li><strong>Количество слов:</strong> ~160,000 слов</li>
+                      <li><strong>Время чтения:</strong> 10-12 часов</li>
+                      <li><strong>Скорость чтения:</strong> 250 слов/мин</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📚 Историческая справка:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Годы написания:</strong> 1928-1940 (12 лет)</li>
+                      <li><strong>Первая публикация:</strong> 1966-1967 годы</li>
+                      <li><strong>Жанр:</strong> Роман в романе, сатира</li>
+                      <li><strong>Судьба рукописи:</strong> Сжигалась автором несколько раз</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2>Зарубежная классика</h2>
+              <p>
+                Произведения зарубежных авторов, которые оказали огромное влияние на мировую литературу
+                и культуру. Эти книги переведены на множество языков и известны во всем мире.
+              </p>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4">📘 1984 - Джордж Оруэлл</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📊 Объем и время:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Страниц:</strong> ~320</li>
+                      <li><strong>Слов:</strong> ~89,000</li>
+                      <li><strong>Время чтения:</strong> 6-7 часов</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📚 Публикация:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Год:</strong> 1948</li>
+                      <li><strong>Жанр:</strong> Антиутопия</li>
+                      <li><strong>Влияние:</strong> Классика жанра</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">🌍 Наследие:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Экранизации:</strong> 2 фильма</li>
+                      <li><strong>Переводы:</strong> 65+ языков</li>
+                      <li><strong>Тираж:</strong> Миллионы копий</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4">⚡ Гарри Поттер и философский камень - Джоан Роулинг</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📊 Объем и время:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Страниц:</strong> ~300</li>
+                      <li><strong>Слов:</strong> ~77,000</li>
+                      <li><strong>Время чтения:</strong> 5-6 часов</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📚 Публикация:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Год:</strong> 1997</li>
+                      <li><strong>Жанр:</strong> Фэнтези</li>
+                      <li><strong>Отказы:</strong> 12 издательств</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">🌍 Феномен:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Фильмы:</strong> 8 частей</li>
+                      <li><strong>Переводы:</strong> 80+ языков</li>
+                      <li><strong>Мерчандайзинг:</strong> Миллиарды долларов</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2>Современная литература</h2>
+              <p>
+                Бестселлеры нашего времени, которые завоевали популярность благодаря динамичным сюжетам,
+                актуальным темам и мастерству повествования.
+              </p>
+
+              <div class="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4">🕵️ Код да Винчи - Дэн Браун</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📊 Объем и время:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Страниц:</strong> ~560</li>
+                      <li><strong>Слов:</strong> ~170,000</li>
+                      <li><strong>Время чтения:</strong> 11-13 часов</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">📚 Публикация:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Год:</strong> 2003</li>
+                      <li><strong>Жанр:</strong> Триллер</li>
+                      <li><strong>Стиль:</strong> Динамичный</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-slate-800 mb-2">🌍 Мировой успех:</h4>
+                    <ul class="space-y-1 text-slate-600">
+                      <li><strong>Переводы:</strong> 44 языка</li>
+                      <li><strong>Экранизация:</strong> Фильм с Томом Хэнксом</li>
+                      <li><strong>Тираж:</strong> 80+ млн копий</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2>Сравнительная таблица по жанрам</h2>
+              <p>
+                Разные литературные жанры имеют свои особенности по объему и времени чтения.
+                Вот сравнение средних показателей для популярных жанров:
+              </p>
+
+              <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+                  <thead class="bg-slate-50">
+                    <tr>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase tracking-wider">Жанр</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase tracking-wider">Объем (слов)</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase tracking-wider">Время чтения</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase tracking-wider">Примеры</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Детективы и триллеры</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">70,000-90,000</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">4-6 часов</td>
+                      <td class="px-6 py-4 text-slate-600">Агата Кристи, Дарья Донцова</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                      <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Современные романы</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">80,000-120,000</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">6-8 часов</td>
+                      <td class="px-6 py-4 text-slate-600">Джоджо Мойес, Элизабет Гилберт</td>
+                    </tr>
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Научная фантастика</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">90,000-150,000</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">6-10 часов</td>
+                      <td class="px-6 py-4 text-slate-600">Айзек Азимов, Филип Дик</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                      <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Биографии и мемуары</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">100,000-200,000</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">7-14 часов</td>
+                      <td class="px-6 py-4 text-slate-600">Уолтер Айзексон, автобиографии</td>
+                    </tr>
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Классическая литература</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">150,000-300,000</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-slate-600">10-20 часов</td>
+                      <td class="px-6 py-4 text-slate-600">Толстой, Достоевский, Шекспир</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h2>Как рассчитать время на любую книгу</h2>
+              <p>
+                <strong>Формула:</strong> Время чтения = (Количество слов × Коэффициент сложности) ÷ Скорость чтения
+              </p>
+              <ul>
+                <li>Количество слов обычно указано в конце книги</li>
+                <li>Коэффициент сложности: 1.0 для легкого чтения, 1.5 для сложного</li>
+                <li>Средняя скорость чтения: 200-300 слов в минуту</li>
+              </ul>
+
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 my-8">
+                <h3 class="text-yellow-800 font-semibold mb-3">💡 Полезный совет:</h3>
+                <p class="text-yellow-700">
+                  Если книга кажется слишком объемной, начните с 20-30 страниц в день.
+                  Даже такой темп даст вам 600-900 страниц в месяц!
+                </p>
+              </div>
+
+              <!-- CTA-плашка после основного контента -->
+              <CTABanner />
+
+              <h2>Рекорды и достижения в чтении</h2>
+              <p>
+                Мир книг полон удивительных рекордов и достижений. Вот некоторые из самых
+                впечатляющих фактов о книгах и чтении:
+              </p>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-lg p-6 text-center">
+                  <div class="text-4xl mb-3">📖</div>
+                  <h3 class="text-lg font-semibold text-red-900 mb-2">Самая длинная книга</h3>
+                  <p class="text-red-800 text-sm">
+                    "В поисках утраченного времени" Марселя Пруста
+                  </p>
+                  <p class="text-red-700 font-bold text-lg mt-2">9,609,000 слов</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6 text-center">
+                  <div class="text-4xl mb-3">⚡</div>
+                  <h3 class="text-lg font-semibold text-green-900 mb-2">Рекорд скорости чтения</h3>
+                  <p class="text-green-800 text-sm">
+                    Профессиональные спид-ридеры
+                  </p>
+                  <p class="text-green-700 font-bold text-lg mt-2">1000+ слов/мин</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-lg p-6 text-center">
+                  <div class="text-4xl mb-3">🌍</div>
+                  <h3 class="text-lg font-semibold text-blue-900 mb-2">Самая переводимая книга</h3>
+                  <p class="text-blue-800 text-sm">
+                    Библия
+                  </p>
+                  <p class="text-blue-700 font-bold text-lg mt-2">3000+ языков</p>
+                </div>
+              </div>
+
+              <h3>Другие интересные факты:</h3>
+              <ul class="space-y-2 text-slate-700">
+                <li><strong>Самая продаваемая книга:</strong> "Библия" - более 5 миллиардов копий</li>
+                <li><strong>Самая экранизируемая:</strong> "Рождественская песнь" Чарльза Диккенса - 23 раза</li>
+                <li><strong>Самая дорогая:</strong> "Лестерский кодекс" Леонардо да Винчи - $30.8 млн</li>
+                <li><strong>Самая маленькая:</strong> "Цветы зла" Шарля Бодлера - всего 6 слов</li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Цитата в конце страницы -->
+  <QuoteBlock />
+
+  <SimpleFooter />
+</BaseLayout>

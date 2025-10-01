@@ -1,0 +1,99 @@
+---
+// Анимированный заголовок с эффектом печатания
+const phrases = [
+  "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие",
+  "Узнайте, сколько книг вы сможете прочитать за год, месяц или десятилетие",
+  "Узнайте, сколько книг вы сможете прочитать за десятилетие, месяц или год"
+];
+
+const typingSpeed = 100; // скорость печати в миллисекундах
+const deletingSpeed = 50; // скорость удаления
+const pauseBetweenPhrases = 2000; // пауза между фразами
+---
+
+<h1 id="typewriter" class="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 leading-tight">
+  Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие
+</h1>
+
+<script>
+  class Typewriter {
+    constructor(element, phrases) {
+      this.element = element;
+      this.phrases = phrases;
+      this.currentPhrase = 0;
+      this.currentText = '';
+      this.isDeleting = false;
+      this.typingSpeed = 100;
+      this.deletingSpeed = 50;
+      this.pauseBetweenPhrases = 2000;
+    }
+
+    async type() {
+      const phrase = this.phrases[this.currentPhrase];
+
+      if (this.isDeleting) {
+        // Удаляем текст
+        this.currentText = phrase.substring(0, this.currentText.length - 1);
+        this.element.textContent = this.currentText;
+
+        if (this.currentText === '') {
+          this.isDeleting = false;
+          this.currentPhrase = (this.currentPhrase + 1) % this.phrases.length;
+          setTimeout(() => this.type(), 500);
+        } else {
+          setTimeout(() => this.type(), this.deletingSpeed);
+        }
+      } else {
+        // Добавляем текст
+        this.currentText = phrase.substring(0, this.currentText.length + 1);
+        this.element.textContent = this.currentText;
+
+        if (this.currentText === phrase) {
+          // Фраза напечатана полностью
+          setTimeout(() => {
+            this.isDeleting = true;
+            this.type();
+          }, this.pauseBetweenPhrases);
+        } else {
+          setTimeout(() => this.type(), this.typingSpeed);
+        }
+      }
+    }
+
+    start() {
+      this.type();
+    }
+  }
+
+  // Запускаем анимацию после загрузки страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const element = document.getElementById('typewriter');
+    if (element) {
+      const typewriter = new Typewriter(element, [
+        "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие",
+        "Узнайте, сколько книг вы сможете прочитать за год, месяц или десятилетие",
+        "Узнайте, сколько книг вы сможете прочитать за десятилетие, месяц или год"
+      ]);
+      typewriter.start();
+    }
+  });
+</script>
+
+<style>
+  #typewriter {
+    border-right: 2px solid #3b82f6;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { border-color: #3b82f6; }
+    51%, 100% { border-color: transparent; }
+  }
+
+  /* Убираем мигающий курсор на мобильных */
+  @media (max-width: 768px) {
+    #typewriter {
+      border-right: none;
+    }
+  }
+</style>

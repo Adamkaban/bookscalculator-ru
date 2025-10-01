@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+import { getAllBooks, getBookUrl, formatReadingTime, getDifficultyLevel } from '../utils/bookData.js';
+
+const books = getAllBooks();
+const totalBooks = books.length;
+const totalPages = books.reduce((sum, book) => sum + book.basic_info.pages, 0);
+const avgReadingTime = books.reduce((sum, book) => {
+  const timeStr = book.basic_info.reading_time;
+  const hours = parseInt(timeStr.match(/(\d+)/)?.[1] || '0');
+  return sum + hours;
+}, 0) / books.length;
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Классическая литература - время чтения и анализ"
+    description="Подробная информация о классических книгах: время чтения, страницы, советы по изучению. Гроза, На дне, Недоросль и другие произведения."
+    keywords="классическая литература, время чтения книг, анализ литературы, сколько читать классику"
+  />
+
+  <style>
+    /* Визуальное выделение подзаголовков */
+    h2 {
+      background: #f8fafc !important;
+      border-bottom: 4px solid #3b82f6 !important;
+      padding: 1rem !important;
+      margin: 2rem 0 1rem 0 !important;
+      border-radius: 8px 8px 0 0 !important;
+      font-weight: 700 !important;
+    }
+
+    h3 {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 0.75rem !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.25rem !important;
+        padding: 0.75rem !important;
+      }
+
+      h3 {
+        font-size: 1.125rem !important;
+        padding: 0.5rem !important;
+      }
+    }
+
+    /* Стили для карточек книг */
+    .book-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    /* Стили для статистики */
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Классическая литература
+            </h1>
+            <p class="text-xl text-slate-600 mb-8">
+              Подробный анализ произведений классиков с расчетами времени чтения
+            </p>
+
+            <!-- Статистика -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+              <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 text-white text-center">
+                <div class="text-2xl font-bold">{totalBooks}</div>
+                <div class="text-sm opacity-90">произведений</div>
+              </div>
+              <div class="stat-card bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-4 text-white text-center">
+                <div class="text-2xl font-bold">{totalPages}</div>
+                <div class="text-sm opacity-90">страниц</div>
+              </div>
+              <div class="stat-card bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-4 text-white text-center">
+                <div class="text-2xl font-bold">{Math.round(avgReadingTime)}</div>
+                <div class="text-sm opacity-90">часов в среднем</div>
+              </div>
+              <div class="stat-card bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-4 text-white text-center">
+                <div class="text-2xl font-bold">XIX-XX</div>
+                <div class="text-sm opacity-90">века</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Основной контент -->
+      <section class="py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-6xl mx-auto">
+
+            <!-- Введение -->
+            <div class="prose prose-lg prose-slate max-w-none mb-12">
+              <h2>Зачем изучать классику?</h2>
+              <p>
+                Классическая литература - это не только культурное наследие, но и глубокий
+                источник мудрости, помогающий понять исторический контекст и
+                вечные человеческие ценности. Каждое произведение - это окно в эпоху,
+                отражение социальных проблем и философских исканий.
+              </p>
+            </div>
+
+            <!-- Сетка книг -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {books.map((book) => {
+                const difficulty = getDifficultyLevel(book);
+                return (
+                  <a href={getBookUrl(book)} class="block group">
+                    <div class="book-card bg-white border border-slate-200 rounded-xl p-6 h-full hover:border-blue-300">
+                      <div class="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 class="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">
+                            {book.title}
+                          </h3>
+                          <p class="text-slate-600 mb-3">{book.author}</p>
+                        </div>
+                        <span class="difficulty-badge difficulty-{difficulty.color}">
+                          {difficulty.icon} {difficulty.label}
+                        </span>
+                      </div>
+
+                      <div class="space-y-3 mb-4">
+                        <div class="flex justify-between items-center text-sm">
+                          <span class="text-slate-600">📖 Страниц:</span>
+                          <span class="font-semibold text-slate-900">{book.basic_info.pages}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                          <span class="text-slate-600">⏰ Время чтения:</span>
+                          <span class="font-semibold text-slate-900">{book.basic_info.reading_time}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                          <span class="text-slate-600">📅 Дней на чтение:</span>
+                          <span class="font-semibold text-slate-900">{book.basic_info.reading_days}</span>
+                        </div>
+                      </div>
+
+                      <div class="text-sm text-slate-600 mb-4">
+                        <strong>Жанр:</strong> {book.basic_info.genre}
+                      </div>
+
+                      <div class="text-sm text-slate-500 line-clamp-3">
+                        {book.interesting_facts[0]}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+
+            <!-- CTA-плашка -->
+            <CTABanner />
+
+            <!-- Советы по чтению классики -->
+            <div class="prose prose-lg prose-slate max-w-none">
+              <h2>Как эффективно читать классику</h2>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white border border-slate-200 rounded-lg p-6 text-center">
+                  <div class="text-3xl mb-3">📚</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Выберите удобный темп</h3>
+                  <p class="text-slate-600 text-sm">
+                    Не пытайтесь прочитать все сразу. Начните с 20-30 страниц в день,
+                    чтобы полностью погрузиться в атмосферу произведения.
+                  </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6 text-center">
+                  <div class="text-3xl mb-3">🔍</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Изучайте контекст</h3>
+                  <p class="text-slate-600 text-sm">
+                    Перед чтением узнайте об исторической эпохе и биографии автора.
+                    Это поможет лучше понять мотивы героев и замысел писателя.
+                  </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6 text-center">
+                  <div class="text-3xl mb-3">✍️</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Ведите заметки</h3>
+                  <p class="text-slate-600 text-sm">
+                    Записывайте мысли, цитаты и наблюдения. Это поможет глубже
+                    осмыслить прочитанное и запомнить важные детали.
+                  </p>
+                </div>
+              </div>
+
+              <h2>Популярные вопросы о чтении классики</h2>
+
+              <div class="space-y-6">
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+                  <h3 class="text-yellow-800 font-semibold mb-3">Сложно ли читать классику?</h3>
+                  <p class="text-yellow-700">
+                    Многие произведения требуют определенной подготовки, но наша система расчета
+                    времени поможет спланировать чтение в комфортном темпе. Начните с более
+                    простых произведений и постепенно переходите к сложным.
+                  </p>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg">
+                  <h3 class="text-blue-800 font-semibold mb-3">Сколько времени нужно на одну книгу?</h3>
+                  <p class="text-blue-700">
+                    В среднем от 2-3 часов для небольших произведений до 30-40 часов для объемных
+                    романов. Учитывайте свой темп чтения и выбирайте подходящий график.
+                  </p>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-400 p-6 rounded-r-lg">
+                  <h3 class="text-green-800 font-semibold mb-3">В каком порядке читать?</h3>
+                  <p class="text-green-700">
+                    Можно начинать с любого произведения, но рекомендуется учитывать хронологию
+                    создания или тематическую связь. Наши рекомендации по связанным произведениям
+                    помогут сориентироваться.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Цитата в конце страницы -->
+  <QuoteBlock />
+
+  <SimpleFooter />
+</BaseLayout>

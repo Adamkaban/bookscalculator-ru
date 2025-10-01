@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Сколько книг можно прочитать за год - расчеты и советы"
+    description="Реалистичные расчеты количества книг за год при разной скорости и времени чтения. Практические советы по планированию"
+    keywords="книги за год, сколько читать книг, планирование чтения, 52 книги в год"
+  />
+
+  <style>
+    /* Визуальное выделение подзаголовков */
+    h2 {
+      background: #f8fafc !important;
+      border-bottom: 4px solid #3b82f6 !important;
+      padding: 1rem !important;
+      margin: 2rem 0 1rem 0 !important;
+      border-radius: 8px 8px 0 0 !important;
+      font-weight: 700 !important;
+    }
+
+    h3 {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 0.75rem !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.25rem !important;
+        padding: 0.75rem !important;
+      }
+
+      h3 {
+        font-size: 1.125rem !important;
+        padding: 0.5rem !important;
+      }
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Сколько книг можно прочитать за год
+            </h1>
+            <p class="text-xl text-slate-600">
+              Реалистичные расчеты и практические советы по планированию чтения
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Основной контент -->
+      <section class="py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="prose prose-lg prose-slate max-w-none">
+
+              <h2>Миф о 52 книгах в год</h2>
+              <p>
+                Многие слышали о челлендже "52 книги в год" - по одной книге в неделю.
+                Это отличная цель, но для большинства людей она может быть слишком амбициозной.
+                Давайте разберемся, сколько книг можно прочитать realistically.
+              </p>
+
+              <h2>Калькулятор чтения: время vs результат</h2>
+              <p>
+                Сколько книг вы сможете прочитать за год при разном ежедневном времени на чтение?
+                Вот точные расчеты на основе средней скорости чтения 250 слов в минуту:
+              </p>
+
+              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">⏰</div>
+                  <h3 class="font-semibold text-blue-900">15 минут в день</h3>
+                  <p class="text-2xl font-bold text-blue-700 mt-2">5-7 книг</p>
+                  <p class="text-sm text-blue-600">~1800 страниц</p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">⏰</div>
+                  <h3 class="font-semibold text-green-900">30 минут в день</h3>
+                  <p class="text-2xl font-bold text-green-700 mt-2">12-15 книг</p>
+                  <p class="text-sm text-green-600">~3600 страниц</p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">⏰</div>
+                  <h3 class="font-semibold text-purple-900">1 час в день</h3>
+                  <p class="text-2xl font-bold text-purple-700 mt-2">25-30 книг</p>
+                  <p class="text-sm text-purple-600">~7200 страниц</p>
+                </div>
+
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">⏰</div>
+                  <h3 class="font-semibold text-orange-900">2 часа в день</h3>
+                  <p class="text-2xl font-bold text-orange-700 mt-2">50+ книг</p>
+                  <p class="text-sm text-orange-600">~14400 страниц</p>
+                </div>
+              </div>
+
+              <h2>Факторы, влияющие на скорость чтения</h2>
+
+              <h3>Тип книги:</h3>
+              <ul>
+                <li>Художественная литература: 200-300 слов/мин</li>
+                <li>Научная литература: 150-250 слов/мин</li>
+                <li>Техническая литература: 100-200 слов/мин</li>
+              </ul>
+
+              <h3>Уровень сложности:</h3>
+              <ul>
+                <li>Легкое чтение: 300+ слов/мин</li>
+                <li>Средняя сложность: 200-250 слов/мин</li>
+                <li>Сложная литература: 150-200 слов/мин</li>
+              </ul>
+
+              <h2>Стратегии эффективного чтения</h2>
+              <p>
+                Чтобы достичь поставленных целей по чтению, важно не только количество времени,
+                но и правильный подход к процессу. Вот проверенные стратегии:
+              </p>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                  <div class="text-3xl mb-3">🎯</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Начните с малого</h3>
+                  <p class="text-slate-600 text-sm mb-3">
+                    Если вы читаете мало, начните с 15-20 минут в день. Это примерно 10-15 страниц.
+                  </p>
+                  <ul class="text-xs text-slate-500 space-y-1">
+                    <li>• Регулярность важнее объема</li>
+                    <li>• Постепенно увеличивайте время</li>
+                    <li>• Не пытайтесь сразу читать часами</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                  <div class="text-3xl mb-3">⏰</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Выберите идеальное время</h3>
+                  <p class="text-slate-600 text-sm mb-3">
+                    Найдите время, когда вы максимально сосредоточены и не спешите.
+                  </p>
+                  <ul class="text-xs text-slate-500 space-y-1">
+                    <li>• Утро - для сложной литературы</li>
+                    <li>• Вечер - для отдыха и развлечения</li>
+                    <li>• Обед - для легкого чтения</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                  <div class="text-3xl mb-3">☕</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Создайте ритуал</h3>
+                  <p class="text-slate-600 text-sm mb-3">
+                    Сделайте чтение приятной привычкой с помощью простых действий.
+                  </p>
+                  <ul class="text-xs text-slate-500 space-y-1">
+                    <li>• Любимое место для чтения</li>
+                    <li>• Чашка чая или кофе</li>
+                    <li>• Отсутствие отвлекающих факторов</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2>Реалистичные цели</h2>
+
+              <div class="bg-green-50 border-l-4 border-green-400 p-6 my-8">
+                <h3 class="text-green-800 font-semibold mb-3">Для начинающих:</h3>
+                <ul class="text-green-700">
+                  <li>1 книга в месяц = 12 книг в год</li>
+                  <li>30 минут в день = вполне достижимо</li>
+                  <li>Фокус на интересных книгах</li>
+                </ul>
+              </div>
+
+              <div class="bg-blue-50 border-l-4 border-blue-400 p-6 my-8">
+                <h3 class="text-blue-800 font-semibold mb-3">Для опытных читателей:</h3>
+                <ul class="text-blue-700">
+                  <li>2-3 книги в месяц = 24-36 книг в год</li>
+                  <li>1-2 часа в день = серьезная цель</li>
+                  <li>Смешивайте разные жанры</li>
+                </ul>
+              </div>
+
+              <!-- CTA-плашка в середине контента -->
+              <CTABanner />
+
+              <h2>Инструменты для отслеживания</h2>
+              <p>
+                Используйте Goodreads, LiveLib или просто заметки в телефоне для отслеживания
+                прочитанного. Это мотивирует и помогает анализировать свой прогресс.
+              </p>
+
+              <h2>Помните главное</h2>
+              <p>
+                <strong>Качество важнее количества.</strong> Лучше прочитать 10 книг вдумчиво,
+                чем 50 "по диагонали". Чтение должно приносить удовольствие и пользу,
+                а не быть гонкой за цифрами.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Цитата в конце страницы -->
+  <QuoteBlock />
+
+  <SimpleFooter />
+</BaseLayout>

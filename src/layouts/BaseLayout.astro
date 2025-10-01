@@ -1,0 +1,76 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Калькулятор времени чтения книг - узнайте, сколько книг вы сможете прочитать за определенное время" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO мета-теги -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="калькулятор чтения, время чтения книг, скорость чтения, книги в год" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:site_name" content="BooksCalculator.ru" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <slot />
+
+    <style>
+      html {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      /* Визуальное выделение подзаголовков - простой и надежный подход */
+      h2 {
+        background: #f8fafc !important;
+        border-bottom: 4px solid #3b82f6 !important;
+        padding: 1rem !important;
+        margin: 2rem 0 1rem 0 !important;
+        border-radius: 8px 8px 0 0 !important;
+        font-weight: 700 !important;
+      }
+
+      h3 {
+        background: #f1f5f9 !important;
+        border-left: 4px solid #3b82f6 !important;
+        padding: 0.75rem !important;
+        margin: 1.5rem 0 1rem 0 !important;
+        border-radius: 0 8px 8px 0 !important;
+        font-weight: 600 !important;
+      }
+
+      /* Мобильная адаптация */
+      @media (max-width: 768px) {
+        h2 {
+          font-size: 1.25rem !important;
+          padding: 0.75rem !important;
+        }
+
+        h3 {
+          font-size: 1.125rem !important;
+          padding: 0.5rem !important;
+        }
+      }
+    </style>
+  </body>
+</html>

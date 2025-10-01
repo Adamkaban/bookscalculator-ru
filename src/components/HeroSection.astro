@@ -1,0 +1,81 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  image?: string;
+  imageAlt?: string;
+  height?: 'small' | 'medium' | 'large';
+  fullWidth?: boolean;
+}
+
+const {
+  title = "Калькулятор времени чтения книг",
+  subtitle = "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие",
+  image = "/images/hero-section.webp",
+  imageAlt = "Книги и чтение",
+  height = 'medium',
+  fullWidth = false
+} = Astro.props;
+
+const heightClasses = {
+  small: 'min-h-[30vh] py-8',
+  medium: 'min-h-[40vh] py-12 md:py-16',
+  large: 'min-h-[60vh] py-16 md:py-24'
+};
+---
+
+<section class="hero-section bg-gradient-to-br from-slate-50 to-blue-50">
+  <div class="container mx-auto px-4">
+    <div class={`flex flex-col ${height === 'small' ? 'md:flex-row md:items-center' : 'lg:flex-row lg:items-center'} justify-center gap-8 ${heightClasses[height]}`}>
+
+      <!-- Текстовый контент -->
+      <div class="flex-1 text-center lg:text-left">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 leading-tight">
+          {title}
+        </h1>
+        <p class="text-lg md:text-xl lg:text-2xl text-slate-600 mb-6 leading-relaxed">
+          {subtitle}
+        </p>
+      </div>
+
+      <!-- Изображение -->
+      <div class={`flex-1 flex ${fullWidth ? 'w-full' : 'justify-center lg:justify-end'}`}>
+        <div class={`relative ${fullWidth ? 'w-full' : 'max-w-md lg:max-w-lg'}`}>
+          <img
+            src={image}
+            alt={imageAlt}
+            class={`w-full h-auto object-cover ${fullWidth ? 'rounded-none' : 'rounded-lg shadow-lg'}`}
+            loading="eager"
+            width="1200"
+            height="400"
+          />
+
+          <!-- Декоративные элементы -->
+          <div class="absolute -top-4 -right-4 text-4xl opacity-20">📚</div>
+          <div class="absolute -bottom-4 -left-4 text-4xl opacity-20">⏰</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Анимация для декоративных элементов */
+  .hero-section .absolute {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero-section .absolute:nth-child(2) {
+    animation-delay: -3s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Градиентный оверлей для изображения */
+  .hero-section img {
+    background: linear-gradient(45deg, #f8fafc, #e2e8f0);
+  }
+</style>

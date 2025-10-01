@@ -1,0 +1,181 @@
+---
+const navigation = [
+  // Основные инструменты (самые популярные)
+  { name: 'Сколько книг вы можете прочитать за год?', href: '/', category: 'tools', featured: true },
+  { name: 'Как долго читать 250 слов?', href: '/skolko-vremeni-nuzhno-chtoby-prochitat-250-slov', category: 'tools' },
+  { name: 'Сколько страниц 100 слов?', href: '/skolko-stranic-100-slov', category: 'tools' },
+
+  // Планирование и анализ
+  { name: 'Сколько книг можно прочитать за год?', href: '/skolko-knig-mozhno-prochitat-za-god', category: 'planning' },
+  { name: 'Сколько книг можно прочитать за день?', href: '/skolko-knig-nado-chitat-v-den', category: 'planning' },
+  { name: 'Сколько по времени читать 100 страниц?', href: '/skolko-chitat-100-stranic', category: 'planning' },
+
+  // Контент
+  { name: 'Классика', href: '/klassicheskaya-literatura', category: 'content', featured: true },
+  { name: 'Интересные факты о книгах', href: '/fakty-ob-izvestnyh-knigah', category: 'content' },
+
+  // Информация
+  { name: 'О проекте', href: '/o-proekte', category: 'info' }
+];
+---
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+  <div class="container mx-auto px-4">
+    <!-- Логотип по центру с кнопкой меню -->
+    <div class="flex items-center justify-center h-16">
+      <a href="/" class="text-2xl font-bold text-slate-900 hover:text-blue-600 transition-colors mr-4">
+        📚 BooksCalculator
+      </a>
+
+
+      <!-- Кнопка меню -->
+      <button
+        id="main-menu-button"
+        class="p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+        aria-label="Открыть меню"
+      >
+        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Выпадающее меню -->
+    <div id="main-dropdown-menu" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 shadow-lg z-50">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col gap-6">
+
+          <!-- Основные инструменты -->
+          <div>
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Калькуляторы</h3>
+            <div class="space-y-1">
+              {navigation.filter(item => item.category === 'tools').map((item) => (
+                <a
+                  href={item.href}
+                  class={`block px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                    item.featured
+                      ? 'text-blue-600 bg-blue-50 font-semibold'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                  }`}
+                >
+                  {item.featured && '★'} {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Планирование -->
+          <div>
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Планирование</h3>
+            <div class="space-y-1">
+              {navigation.filter(item => item.category === 'planning').map((item) => (
+                <a
+                  href={item.href}
+                  class="block px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-md transition-colors duration-200"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Контент и информация -->
+          <div>
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Контент</h3>
+            <div class="space-y-1">
+              {navigation.filter(item => item.category === 'content' || item.category === 'info').map((item) => (
+                <a
+                  href={item.href}
+                  class={`block px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                    item.featured
+                      ? 'text-green-600 bg-green-50 font-semibold'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                  }`}
+                >
+                  {item.featured && '●'} {item.name}
+                </a>
+              ))}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Обработчик главного меню
+  const mainMenuButton = document.getElementById('main-menu-button');
+  const mainDropdownMenu = document.getElementById('main-dropdown-menu');
+
+  if (mainMenuButton && mainDropdownMenu) {
+    mainMenuButton.addEventListener('click', () => {
+      mainDropdownMenu.classList.toggle('hidden');
+    });
+
+    // Закрыть меню при клике вне его
+    document.addEventListener('click', (e) => {
+      if (!mainMenuButton.contains(e.target) && !mainDropdownMenu.contains(e.target)) {
+        mainDropdownMenu.classList.add('hidden');
+      }
+    });
+  }
+
+  // Простая инициализация
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('BooksCalculator header loaded');
+  });
+</script>
+
+<style>
+  /* Стили для активной ссылки */
+  .active {
+    color: rgb(37 99 235);
+  }
+
+  /* Выпадное меню */
+  #main-dropdown-menu {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(203, 213, 225, 0.5);
+    animation: mainDropdownFade 0.3s ease-out;
+  }
+
+  @keyframes mainDropdownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Адаптивность для мобильных */
+  @media (max-width: 768px) {
+    #main-dropdown-menu {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    /* Быстрые ссылки скрыты на мобильных */
+    .hidden.md\\:flex {
+      display: none;
+    }
+
+    /* Улучшенная мобильная навигация */
+    .mobile-nav-item {
+      padding: 0.75rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .mobile-nav-item:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
