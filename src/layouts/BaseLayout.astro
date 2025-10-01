@@ -15,22 +15,9 @@ const { title, description = "Калькулятор времени чтения
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO мета-теги -->
+    <!-- Базовые мета-теги (SEO мета-теги генерируются компонентом SEOHead) -->
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="keywords" content="калькулятор чтения, время чтения книг, скорость чтения, книги в год" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:site_name" content="BooksCalculator.ru" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    {description && <meta name="description" content={description} />}
   </head>
   <body>
     <slot />
