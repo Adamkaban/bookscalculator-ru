@@ -193,8 +193,8 @@ const difficulty = getDifficultyLevel(book);
               Подробная информация о книге, время чтения и практические советы
             </p>
 
-            <div class="bg-white rounded-2xl shadow-lg p-6 inline-block">
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 inline-block w-full max-w-md sm:max-w-none">
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center">
                 <div class="info-card bg-white rounded-lg p-4 border border-slate-200">
                   <div class="text-2xl mb-2">📖</div>
                   <div class="text-lg font-bold text-blue-600">{book.basic_info.pages}</div>
@@ -228,7 +228,7 @@ const difficulty = getDifficultyLevel(book);
             <div class="prose prose-lg prose-slate max-w-none">
 
               <h2>📊 Основная информация</h2>
-              <div class="grid md:grid-cols-2 gap-6 mb-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
                   <h3 class="text-lg font-semibold text-blue-900 mb-4">Технические характеристики</h3>
                   <ul class="space-y-2 text-blue-800">
@@ -245,89 +245,6 @@ const difficulty = getDifficultyLevel(book);
                     <li><strong>Дней на чтение:</strong> {book.basic_info.reading_days}</li>
                     <li><strong>Скорость чтения:</strong> 250 слов/мин</li>
                   </ul>
-                </div>
-              </div>
-
-              <!-- Интерактивная таблица времени чтения -->
-              <h2>📊 Интерактивная таблица времени чтения</h2>
-              <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 mb-8 border border-blue-200">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <!-- Выбор количества страниц -->
-                  <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-100">
-                    <h3 class="text-lg font-semibold text-blue-900 mb-4 flex items-center">
-                      <span class="text-2xl mr-2">📖</span>
-                      Количество страниц
-                    </h3>
-                    <div class="grid grid-cols-3 gap-2">
-                      {book.page_counts.map(count => (
-                        <button
-                          class={`page-count-btn px-3 py-2 text-sm font-medium rounded-lg border-2 transition-all duration-200 ${
-                            count === 100
-                              ? 'bg-blue-600 text-white border-blue-600'
-                              : 'bg-white text-slate-700 border-slate-300 hover:border-blue-400 hover:bg-blue-50'
-                          }`}
-                          data-pages={count}
-                        >
-                          {count}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <!-- Выбор скорости чтения -->
-                  <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-100">
-                    <h3 class="text-lg font-semibold text-blue-900 mb-4 flex items-center">
-                      <span class="text-2xl mr-2">⚡</span>
-                      Скорость чтения
-                    </h3>
-                    <div class="space-y-2">
-                      {book.reading_speeds.map(speed => (
-                        <label class={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
-                          speed.wpm === 250
-                            ? 'bg-green-600 text-white border-green-600'
-                            : 'bg-white text-slate-700 border-slate-300 hover:border-green-400 hover:bg-green-50'
-                        }`}>
-                          <input
-                            type="radio"
-                            name="reading-speed"
-                            value={speed.wpm}
-                            checked={speed.wpm === 250}
-                            class="mr-3 text-green-600 focus:ring-green-500"
-                          />
-                          <div>
-                            <div class="font-medium">{speed.name}</div>
-                            <div class="text-sm opacity-75">{speed.description}</div>
-                          </div>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Результаты расчета -->
-                <div id="reading-time-results" class="mt-6 bg-white rounded-lg p-6 border border-blue-200">
-                  <h3 class="text-lg font-semibold text-blue-900 mb-4 flex items-center">
-                    <span class="text-2xl mr-2">⏰</span>
-                    Результаты расчета
-                  </h3>
-                  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="text-center">
-                      <div class="text-2xl font-bold text-blue-600" id="minutes-result">0</div>
-                      <div class="text-sm text-slate-600">минут</div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-2xl font-bold text-green-600" id="hours-result">0</div>
-                      <div class="text-sm text-slate-600">часов</div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-2xl font-bold text-purple-600" id="days-result">0</div>
-                      <div class="text-sm text-slate-600">дней</div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-2xl font-bold text-orange-600" id="weeks-result">0</div>
-                      <div class="text-sm text-slate-600">недель</div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -350,7 +267,7 @@ const difficulty = getDifficultyLevel(book);
               </div>
 
               <h2>🎭 Особенности жанра</h2>
-              <div class="grid md:grid-cols-2 gap-6 mb-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
                   <h3 class="text-lg font-semibold text-purple-900 mb-4">Сравнение с жанром</h3>
                   <p class="text-purple-800">{book.genre_features.genre_comparison}</p>
@@ -390,7 +307,7 @@ const difficulty = getDifficultyLevel(book);
               </ul>
 
               <h2>🌟 Культурное значение</h2>
-              <div class="grid md:grid-cols-2 gap-6 mb-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
                   <h3 class="text-lg font-semibold text-emerald-900 mb-4">Литературное влияние</h3>
                   <p class="text-emerald-800">{book.cultural_significance.literary_impact}</p>
@@ -414,7 +331,7 @@ const difficulty = getDifficultyLevel(book);
               <CTABanner />
 
               <h2>🎬 Современные адаптации</h2>
-              <div class="grid md:grid-cols-2 gap-6 mb-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div class="bg-red-50 border border-red-200 rounded-lg p-6">
                   <h3 class="text-lg font-semibold text-red-900 mb-4">Фильмы и сериалы</h3>
                   <p class="text-red-800">{book.modern_adaptations.films_series}</p>
@@ -426,7 +343,7 @@ const difficulty = getDifficultyLevel(book);
               </div>
 
               <h2>📚 Другие книги для чтения</h2>
-              <div class="grid md:grid-cols-3 gap-4 mb-8">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
                 {relatedBooks.map((relatedBook) => (
                   <a
                     href={getBookUrl(relatedBook)}
@@ -450,143 +367,73 @@ const difficulty = getDifficultyLevel(book);
 
   <QuoteBlock />
   <SimpleFooter />
+
+  <!-- Оптимизация производительности -->
+  <script>
+    // Ленивая загрузка изображений
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('img[data-src]');
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      images.forEach(img => imageObserver.observe(img));
+    });
+
+    // Предзагрузка критических ресурсов
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'font';
+    preloadLink.type = 'font/woff2';
+    preloadLink.crossOrigin = '';
+    document.head.appendChild(preloadLink);
+  </script>
+
+  <!-- Мета-теги для мобильной оптимизации -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Open Graph для социальных сетей -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content={book.seo.meta_title}>
+  <meta property="og:description" content={book.seo.meta_description}>
+  <meta property="og:site_name" content="BooksCalculator.ru">
+  <meta property="article:author" content={book.author}>
+  <meta property="article:published_time" content={new Date().toISOString()}>
+  <meta property="article:section" content={book.basic_info.genre}>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={book.seo.meta_title}>
+  <meta name="twitter:description" content={book.seo.meta_description}>
+
+  <!-- Структурированные данные Schema.org -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "{book.title}",
+      "author": {
+        "@type": "Person",
+        "name": "{book.author}"
+      },
+      "numberOfPages": {book.basic_info.pages},
+      "genre": "{book.basic_info.genre}",
+      "datePublished": "{book.basic_info.year_written}",
+      "description": "{book.seo.meta_description}",
+      "keywords": "{book.seo.keywords.join(', ')}",
+      "timeRequired": "{book.basic_info.reading_time}",
+      "educationalUse": "{book.basic_info.recommended_age}"
+    }
+  </script>
 </BaseLayout>
-
-<script>
-  // Интерактивная таблица времени чтения
-  class ReadingTimeCalculator {
-    constructor() {
-      this.currentPages = 100;
-      this.currentSpeed = 250;
-      this.init();
-    }
-
-    init() {
-      this.bindEvents();
-      this.updateResults();
-    }
-
-    bindEvents() {
-      // Обработчики для кнопок количества страниц
-      document.querySelectorAll('.page-count-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          this.currentPages = parseInt(e.target.dataset.pages);
-          this.updateActiveButtons();
-          this.updateResults();
-        });
-      });
-
-      // Обработчики для радио-кнопок скорости чтения
-      document.querySelectorAll('input[name="reading-speed"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-          this.currentSpeed = parseInt(e.target.value);
-          this.updateResults();
-        });
-      });
-    }
-
-    updateActiveButtons() {
-      // Обновляем активные кнопки страниц
-      document.querySelectorAll('.page-count-btn').forEach(btn => {
-        const pages = parseInt(btn.dataset.pages);
-        if (pages === this.currentPages) {
-          btn.className = 'page-count-btn px-3 py-2 text-sm font-medium rounded-lg border-2 bg-blue-600 text-white border-blue-600';
-        } else {
-          btn.className = 'page-count-btn px-3 py-2 text-sm font-medium rounded-lg border-2 bg-white text-slate-700 border-slate-300 hover:border-blue-400 hover:bg-blue-50';
-        }
-      });
-    }
-
-    updateResults() {
-      const totalWords = this.currentPages * 300; // Среднее количество слов на странице
-      const minutes = Math.ceil(totalWords / this.currentSpeed);
-      const hours = Math.floor(minutes / 60);
-      const remainingMinutes = minutes % 60;
-      const days = Math.ceil(hours / 8); // Предполагаем 8 часов чтения в день
-      const weeks = Math.ceil(days / 7);
-
-      // Анимируем результаты
-      this.animateNumber('minutes-result', minutes);
-      this.animateNumber('hours-result', hours);
-      this.animateNumber('days-result', days);
-      this.animateNumber('weeks-result', weeks);
-    }
-
-    animateNumber(elementId, target) {
-      const element = document.getElementById(elementId);
-      if (!element) return;
-
-      const start = parseInt(element.textContent) || 0;
-      const duration = 500;
-      const startTime = performance.now();
-
-      const animate = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        const current = Math.floor(start + (target - start) * this.easeOut(progress));
-        element.textContent = current;
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
-
-      requestAnimationFrame(animate);
-    }
-
-    easeOut(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
-  }
-
-  // Инициализация калькулятора после загрузки страницы
-  document.addEventListener('DOMContentLoaded', () => {
-    new ReadingTimeCalculator();
-  });
-</script>
-
-<style>
-  /* Дополнительные стили для интерактивной таблицы */
-  .page-count-btn {
-    transition: all 0.2s ease;
-  }
-
-  .page-count-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-
-  .page-count-btn:active {
-    transform: translateY(0);
-  }
-
-  /* Анимация появления результатов */
-  #reading-time-results {
-    animation: fadeInUp 0.6s ease-out;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Адаптивность для мобильных */
-  @media (max-width: 768px) {
-    .grid-cols-3 {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.5rem;
-    }
-
-    .page-count-btn {
-      padding: 0.5rem;
-      font-size: 0.75rem;
-    }
-  }
-</style>

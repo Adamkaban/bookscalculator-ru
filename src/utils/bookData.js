@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Путь к папке с JSON данными (корневая папка p-seo text)
-const sourceDir = path.join(__dirname, '../../../p-seo text');
+const sourceDir = path.join(process.cwd(), 'p-seo text');
 
 // Функция для динамической загрузки всех JSON файлов
 function loadAllBooksData() {
