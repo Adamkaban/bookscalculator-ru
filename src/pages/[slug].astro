@@ -29,10 +29,10 @@ const { book } = Astro.props;
 const relatedBooks = getRelatedBooks(book.id);
 const difficulty = getDifficultyLevel(book);
 
-// SEO данные
-const title = book.seo.meta_title;
-const description = book.seo.meta_description;
-const keywords = book.seo.keywords.join(', ');
+// SEO данные с fallback
+const title = book.seo?.meta_title || `${book.title} - ${book.author}`;
+const description = book.seo?.meta_description || `Узнайте, сколько времени уйдет на чтение книги "${book.title}" автора ${book.author}. Подробная информация и советы по чтению.`;
+const keywords = book.seo?.keywords?.join(', ') || `${book.title}, ${book.author}, время чтения, страницы`;
 ---
 
 <BaseLayout>

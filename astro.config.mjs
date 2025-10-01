@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://bookscalculator.ru',
+  site: 'https://bookscalculator.ru',
   compressHTML: true,
 
   build: {

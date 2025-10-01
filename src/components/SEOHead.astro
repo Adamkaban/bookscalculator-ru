@@ -21,12 +21,15 @@ const {
   author
 } = Astro.props;
 
-// Канонический URL
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Fallback для пустого тайтла
+const finalTitle = title || "Калькулятор времени чтения книг";
+
+// Канонический URL с правильным формированием для Vercel
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://bookscalculator.ru');
 ---
 
 <!-- Основные мета-теги -->
-<title>{title}</title>
+<title>{finalTitle}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author || "BooksCalculator.ru"} />
@@ -36,28 +39,28 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph -->
-<meta property="og:title" content={title} />
+<meta property="og:title" content={finalTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content="BookCalculator.ru" />
 <meta property="og:image" content={new URL(image, Astro.site)} />
-<meta property="og:image:alt" content={title} />
+<meta property="og:image:alt" content={finalTitle} />
 <meta property="og:locale" content="ru_RU" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={finalTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.site)} />
-<meta name="twitter:image:alt" content={title} />
+<meta name="twitter:image:alt" content={finalTitle} />
 
 <!-- Schema.org разметка -->
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": type === 'article' ? "Article" : "WebSite",
-    "name": title,
+    "name": finalTitle,
     "description": description,
     "url": canonicalURL,
     "inLanguage": "ru-RU",
