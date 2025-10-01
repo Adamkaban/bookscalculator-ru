@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Разрешаем индексацию основных страниц
+Allow: /skolko-stranic-
+Allow: /skolko-chitat-
+Allow: /skolko-knig-
+Allow: /skolko-vremeni-
+Allow: /skolko-slov-
+Allow: /fakty-ob-izvestnyh-knigah
+Allow: /klassicheskaya-literatura
+Allow: /o-proekte
+
+# Запрещаем индексацию административных и служебных страниц
+Disallow: /_astro/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /scripts/
+
+# Sitemap
+Sitemap: https://bookscalculator.ru/sitemap-index.xml
+
+# Crawl-delay для вежливости
+Crawl-delay: 1
