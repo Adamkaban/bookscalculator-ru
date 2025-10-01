@@ -43,6 +43,9 @@ function calculateReadingTimeSeconds(words, wpm) {
   }
 }
 
+// Канонический URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
 // SEO данные - оптимизировано для Яндекс
 const seoData = {
   title: "Калькулятор времени чтения слов онлайн - рассчитать за секунды | 100, 250, 500, 1000 слов",

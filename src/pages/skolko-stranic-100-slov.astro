@@ -5,6 +5,8 @@ import SimpleFooter from '../components/SimpleFooter.astro';
 import SEOHead from '../components/SEOHead.astro';
 import QuoteBlock from '../components/QuoteBlock.astro';
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
 const wordsToPagesData = [
     { words: 100, pages: '0.2 страницы', isGreen: true },
   { words: 200, pages: '0.4 страницы', isGreen: true },
