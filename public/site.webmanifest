@@ -1,0 +1,23 @@
+{
+    "name": "BooksCalculator.ru - Калькулятор времени чтения книг",
+    "short_name": "BooksCalculator",
+    "description": "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие",
+    "icons": [
+        {
+            "src": "/favicon.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#3b82f6",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "/",
+    "lang": "ru"
+}

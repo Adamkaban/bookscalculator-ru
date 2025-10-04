@@ -12,12 +12,22 @@ const { title, description = "Калькулятор времени чтения
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3b82f6" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="theme-color" content="#3b82f6" />
+
     <meta name="generator" content={Astro.generator} />
 
     <!-- Базовые мета-теги (SEO мета-теги генерируются компонентом SEOHead) -->
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <!-- Title и description генерируются в компоненте SEOHead для избежания дублирования -->
   </head>
   <body>
     <slot />

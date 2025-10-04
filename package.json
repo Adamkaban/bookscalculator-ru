@@ -3,12 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run generate-books && astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "npm run generate-books && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate-books": "node scripts/generateBookPages.js"
+    "generate-books": "node scripts/generateBookPages.js",
+    "generate-sitemap": "node scripts/generateSitemap.js",
+    "generate-complete-sitemap": "node scripts/generateCompleteSitemap.js"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
