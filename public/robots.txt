@@ -1,13 +1,52 @@
 User-agent: *
 Allow: /
-Crawl-delay: 1
 
-User-agent: Yandex
+# Запрещаем индексацию технических файлов
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /scripts/
+Disallow: /*.json$
+Disallow: /p-seo text/
+
+# Запрещаем индексацию дублированного контента
+Disallow: /skolko-stranic-*-slov$
+Noindex: /skolko-stranic-*-slov$
+
+# Разрешаем основные страницы
+Allow: /skolko-chitat-*
 Allow: /
-Crawl-delay: 0.5
+Allow: /o-proekte
+Allow: /fakty-ob-izvestnyh-knigah
+Allow: /skolko-knig-mozhno-prochitat-za-god
+Allow: /skolko-knig-nado-chitat-v-den
+Allow: /skolko-chitat-stranic
+Allow: /skolko-slov-na-stranice
+Allow: /skolko-chitat-100-stranic
 
-User-agent: GoogleBot
-Allow: /
-Crawl-delay: 1
+# Запрещаем индексацию страниц слов (оставляем только основные)
+Disallow: /skolko-stranic-100-slov
+Disallow: /skolko-stranic-200-slov
+Disallow: /skolko-stranic-300-slov
+Disallow: /skolko-stranic-400-slov
+Disallow: /skolko-stranic-500-slov
+Disallow: /skolko-stranic-600-slov
+Disallow: /skolko-stranic-700-slov
+Disallow: /skolko-stranic-800-slov
+Disallow: /skolko-stranic-900-slov
+Disallow: /skolko-stranic-1000-slov
+Disallow: /skolko-stranic-1250-slov
+Disallow: /skolko-stranic-1500-slov
+Disallow: /skolko-stranic-2000-slov
+Disallow: /skolko-stranic-2500-slov
+Disallow: /skolko-stranic-3000-slov
+Disallow: /skolko-stranic-3500-slov
+Disallow: /skolko-stranic-4000-slov
+Disallow: /skolko-stranic-4500-slov
+Disallow: /skolko-stranic-5000-slov
 
+# Sitemap
 Sitemap: https://bookscalculator.ru/sitemap.xml
+
+# Crawl-delay для предотвращения перегрузки сервера
+Crawl-delay: 1

@@ -1,0 +1,56 @@
+# Редиректы для альтернативных URL книг
+/skolko-chitat-voyna-i-mir-tolstoy    /skolko-chitat-voyna-i-mir    301
+/skolko-chitat-anna-karenina-tolstoy /skolko-chitat-anna-karenina  301
+/skolko-chitat-prestuplenie-i-nakazanie-dostoevsky   /skolko-chitat-prestuplenie-i-nakazanie  301
+/skolko-chitat-master-i-margarita-bulgakov   /skolko-chitat-master-i-margarita  301
+
+# Редиректы для альтернативных вариантов написания
+/skolko-stranic-voyna-i-mir    /skolko-chitat-voyna-i-mir    301
+/voyna-i-mir-vremya-chteniya    /skolko-chitat-voyna-i-mir    301
+/voyna-i-mir-skolko-stranic    /skolko-chitat-voyna-i-mir    301
+
+# Редиректы для популярных запросов
+/voina-i-mir-skolko-stranic    /skolko-chitat-voyna-i-mir    301
+/anna-karenina-skolko-stranic  /skolko-chitat-anna-karenina  301
+/master-i-margarita-skolko-stranic   /skolko-chitat-master-i-margarita  301
+
+# Редиректы для английских вариантов
+/war-and-peace-reading-time    /skolko-chitat-voyna-i-mir    301
+/anna-karenina-reading-time    /skolko-chitat-anna-karenina  301
+
+# Редиректы для старых URL с категориями
+/books/voyna-i-mir-tolstoy     /skolko-chitat-voyna-i-mir    301
+/books/anna-karenina-tolstoy   /skolko-chitat-anna-karenina  301
+
+# Редиректы для общих калькуляторов
+/reading-calculator    /skolko-chitat-stranic    301
+/book-time-calculator  /skolko-chitat-stranic    301
+/reading-time-calc     /skolko-chitat-stranic    301
+
+# Редиректы для страниц слов
+/skolko-stranic-100-slov       /skolko-stranic-100-slov       301
+/skolko-stranic-200-slov       /skolko-stranic-200-slov       301
+/skolko-stranic-300-slov       /skolko-stranic-300-slov       301
+/skolko-stranic-400-slov       /skolko-stranic-400-slov       301
+/skolko-stranic-500-slov       /skolko-stranic-500-slov       301
+/skolko-stranic-600-slov       /skolko-stranic-600-slov       301
+/skolko-stranic-700-slov       /skolko-stranic-700-slov       301
+/skolko-stranic-800-slov       /skolko-stranic-800-slov       301
+/skolko-stranic-900-slov       /skolko-stranic-900-slov       301
+/skolko-stranic-1000-slov      /skolko-stranic-1000-slov      301
+
+# Редиректы для страниц книг без префикса skolko-chitat-
+/voyna-i-mir                   /skolko-chitat-voyna-i-mir     301
+/anna-karenina                 /skolko-chitat-anna-karenina   301
+/master-i-margarita            /skolko-chitat-master-i-margarita  301
+/prestuplenie-i-nakazanie      /skolko-chitat-prestuplenie-i-nakazanie  301
+
+# Редиректы для мобильных поддоменов (если есть)
+/m/*                           /:splat                        301
+/mobile/*                      /:splat                        301
+
+# Редиректы для www версии
+https://www.bookscalculator.ru/*   https://bookscalculator.ru/:splat   301!
+
+# Редиректы для http версии
+http://bookscalculator.ru/*        https://bookscalculator.ru/:splat   301!

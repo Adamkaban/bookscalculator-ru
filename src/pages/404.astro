@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+---
+
+<BaseLayout>
+  <SEOHead
+    title="Страница не найдена - 404"
+    description="К сожалению, запрашиваемая страница не найдена. Но мы поможем вам найти нужную информацию о времени чтения книг."
+    keywords="404, страница не найдена, ошибка, книги, чтение"
+  />
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция с ошибкой 404 -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-6xl md:text-8xl font-bold text-slate-900 mb-6">
+              404
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-slate-700 mb-4">
+              Страница не найдена
+            </h2>
+            <p class="text-lg text-slate-600 mb-8">
+              К сожалению, запрашиваемая страница была удалена или перемещена.
+              Но мы поможем вам найти нужную информацию!
+            </p>
+
+            <!-- Кнопка назад -->
+            <button onclick="history.back()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg mb-8">
+              ← Вернуться назад
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Популярные страницы -->
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">
+              Популярные страницы
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              <!-- Главная страница -->
+              <a href="/" class="block bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6 hover:from-blue-100 hover:to-indigo-100 transition-all duration-200 text-center">
+                <div class="text-4xl mb-4">🏠</div>
+                <h3 class="text-xl font-semibold text-blue-900 mb-2">Главная</h3>
+                <p class="text-blue-700 text-sm">Калькулятор времени чтения книг</p>
+              </a>
+
+              <!-- Калькулятор страниц -->
+              <a href="/skolko-chitat-stranic" class="block bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6 hover:from-green-100 hover:to-emerald-100 transition-all duration-200 text-center">
+                <div class="text-4xl mb-4">📄</div>
+                <h3 class="text-xl font-semibold text-green-900 mb-2">Калькулятор страниц</h3>
+                <p class="text-green-700 text-sm">Сколько времени читать страницы</p>
+              </a>
+
+              <!-- Калькулятор слов -->
+              <a href="/skolko-slov-na-stranice" class="block bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-6 hover:from-purple-100 hover:to-pink-100 transition-all duration-200 text-center">
+                <div class="text-4xl mb-4">📝</div>
+                <h3 class="text-xl font-semibold text-purple-900 mb-2">Калькулятор слов</h3>
+                <p class="text-purple-700 text-sm">Сколько слов на странице</p>
+              </a>
+
+              <!-- Популярные книги -->
+              <a href="/skolko-chitat-voyna-i-mir" class="block bg-gradient-to-br from-red-50 to-rose-50 border border-red-200 rounded-lg p-6 hover:from-red-100 hover:to-rose-100 transition-all duration-200 text-center">
+                <div class="text-4xl mb-4">📚</div>
+                <h3 class="text-xl font-semibold text-red-900 mb-2">Война и мир</h3>
+                <p class="text-red-700 text-sm">Время чтения великой эпопеи</p>
+              </a>
+
+              <!-- Анна Каренина -->
+              <a href="/skolko-chitat-anna-karenina" class="block bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-6 hover:from-yellow-100 hover:to-orange-100 transition-all duration-200 text-center">
+                <div class="text-4xl mb-4">💛</div>
+                <h3 class="text-xl font-semibold text-yellow-900 mb-2">Анна Каренина</h3>
+                <p class="text-yellow-700 text-sm">Сколько времени читать роман</p>
+              </a>
+
+              <!-- Мастер и Маргарита -->
+              <a href="/skolko-chitat-master-i-margarita" class="block bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-lg p-6 hover:from-gray-100 hover:to-slate-100 transition-all duration-200 text-center">
+                <div class="text-4xl mb-4">⭐</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Мастер и Маргарита</h3>
+                <p class="text-gray-700 text-sm">Мистический роман Булгакова</p>
+              </a>
+            </div>
+
+            <!-- Поиск по сайту -->
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-8 text-center">
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">
+                Не нашли нужную страницу?
+              </h3>
+              <p class="text-slate-600 mb-6">
+                Попробуйте найти книгу или информацию через поиск
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Введите название книги или запрос..."
+                  class="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+                <button
+                  onclick="searchSite()"
+                  class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg"
+                >
+                  Искать 🔍
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Полезная информация -->
+      <section class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8">
+              Полезная информация
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+              <div class="bg-white rounded-lg p-6 shadow-sm">
+                <div class="text-4xl mb-4">⏰</div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Планирование чтения</h3>
+                <p class="text-slate-600">Узнайте, сколько книг вы сможете прочитать за год, месяц или неделю</p>
+                <a href="/skolko-knig-mozhno-prochitat-za-god" class="text-blue-600 hover:text-blue-800 text-sm font-medium mt-3 inline-block">
+                  Подробнее →
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-6 shadow-sm">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Статистика чтения</h3>
+                <p class="text-slate-600">Интересные факты и статистика об известных книгах</p>
+                <a href="/fakty-ob-izvestnyh-knigah" class="text-blue-600 hover:text-blue-800 text-sm font-medium mt-3 inline-block">
+                  Подробнее →
+                </a>
+              </div>
+              <div class="bg-white rounded-lg p-6 shadow-sm">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Мотивация</h3>
+                <p class="text-slate-600">Сколько книг нужно читать в день для достижения целей</p>
+                <a href="/skolko-knig-nado-chitat-v-den" class="text-blue-600 hover:text-blue-800 text-sm font-medium mt-3 inline-block">
+                  Подробнее →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <SimpleFooter />
+
+  <script>
+    function searchSite() {
+      const searchInput = document.getElementById('search-input');
+      const query = searchInput.value.trim();
+
+      if (query) {
+        // Перенаправляем на страницу с результатами поиска или на главную с параметром
+        window.location.href = `/?search=${encodeURIComponent(query)}`;
+      } else {
+        // Фокус на поле ввода если пустое
+        searchInput.focus();
+      }
+    }
+
+    // Поиск по Enter
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchSite();
+      }
+    });
+  </script>
+
+  <style>
+    .hero-section {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+  </style>
+</BaseLayout>

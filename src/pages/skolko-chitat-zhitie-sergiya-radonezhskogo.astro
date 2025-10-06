@@ -341,45 +341,4 @@ const difficulty = getDifficultyLevel(book);
     preloadLink.crossOrigin = '';
     document.head.appendChild(preloadLink);
   </script>
-
-  <!-- Мета-теги для мобильной оптимизации -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#3b82f6">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <!-- Open Graph для социальных сетей -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content={book.seo.meta_title}>
-  <meta property="og:description" content={book.seo.meta_description}>
-  <meta property="og:site_name" content="BooksCalculator.ru">
-  <meta property="article:author" content={book.author}>
-  <meta property="article:published_time" content={new Date().toISOString()}>
-  <meta property="article:section" content={book.basic_info.genre}>
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content={book.seo.meta_title}>
-  <meta name="twitter:description" content={book.seo.meta_description}>
-
-  <!-- Структурированные данные Schema.org -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Book",
-      "name": "{book.title}",
-      "author": {
-        "@type": "Person",
-        "name": "{book.author}"
-      },
-      "numberOfPages": {book.basic_info.pages},
-      "genre": "{book.basic_info.genre}",
-      "datePublished": "{book.basic_info.year_written}",
-      "description": "{book.seo.meta_description}",
-      "keywords": "{book.seo.keywords.join(', ')}",
-      "timeRequired": "{book.basic_info.reading_time}",
-      "educationalUse": "{book.basic_info.recommended_age}"
-    }
-  </script>
 </BaseLayout>
