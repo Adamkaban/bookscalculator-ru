@@ -26,7 +26,7 @@ export default defineConfig({
       // Кастомные настройки для разных типов страниц
       serialize: (item) => {
         // Для главной страницы устанавливаем максимальный приоритет
-        if (item.url === 'https://bookscalculator.ru/') {
+        if (item.url.endsWith('/')) {
           return {
             ...item,
             priority: 1.0,
@@ -35,7 +35,7 @@ export default defineConfig({
         }
 
         // Для страниц-калькуляторов устанавливаем высокий приоритет
-        if (item.url.includes('/skolko-') && (item.url.includes('-stranic') || item.url.includes('-slov'))) {
+        if (item.url.includes('/skolko-') && (item.url.includes('-stranic') || item.url.includes('-slov') || item.url.includes('-слов'))) {
           return {
             ...item,
             priority: 0.9,
@@ -44,7 +44,7 @@ export default defineConfig({
         }
 
         // Для страниц книг устанавливаем средний приоритет
-        if (item.url.includes('/skolko-chitat-')) {
+        if (item.url.includes('/skolko-chitat-') && !item.url.includes('-stranic') && !item.url.includes('-slov') && !item.url.includes('-слов')) {
           return {
             ...item,
             priority: 0.8,

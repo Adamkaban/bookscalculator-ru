@@ -24,8 +24,8 @@ const {
 // Fallback для пустого тайтла
 const finalTitle = title || "Калькулятор времени чтения книг";
 
-// Канонический URL всегда должен указывать на основной домен сайта
-// Независимо от того, где сайт размещен (Vercel, localhost и т.д.)
+// Канонический URL должен указывать на текущий домен сайта
+// Используем Astro.site для правильного определения домена в зависимости от окружения
 const canonicalOrigin = Astro.site || 'https://bookscalculator.ru';
 const canonicalURL = new URL(Astro.url.pathname, canonicalOrigin);
 ---
@@ -69,14 +69,14 @@ const canonicalURL = new URL(Astro.url.pathname, canonicalOrigin);
     "copyrightHolder": {
       "@type": "Organization",
       "name": "BooksCalculator.ru",
-      "url": "https://bookscalculator.ru"
+      "url": canonicalURL.origin
     },
     "publisher": {
       "@type": "Organization",
       "name": "BooksCalculator.ru",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://bookscalculator.ru/images/hero-section.webp"
+        "url": `${canonicalOrigin}/images/hero-section.webp`
       }
     },
     ...(author && {
@@ -115,7 +115,7 @@ const canonicalURL = new URL(Astro.url.pathname, canonicalOrigin);
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://bookscalculator.ru/search?q={search_term_string}",
+      "target": `${canonicalOrigin}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   }
