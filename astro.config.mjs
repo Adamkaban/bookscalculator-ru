@@ -5,7 +5,11 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://bookscalculator.ru',
+  site: process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : process.env.GITHUB_PAGES
+    ? `https://${process.env.GITHUB_REPOSITORY_OWNER}.github.io/${process.env.GITHUB_REPOSITORY?.split('/')[1] || ''}`
+    : 'https://bookscalculator.ru',
   compressHTML: true,
 
   build: {

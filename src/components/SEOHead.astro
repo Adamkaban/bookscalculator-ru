@@ -25,8 +25,30 @@ const {
 const finalTitle = title || "Калькулятор времени чтения книг";
 
 // Канонический URL должен указывать на текущий домен сайта
-// Используем Astro.site для правильного определения домена в зависимости от окружения
-const canonicalOrigin = Astro.site || 'https://bookscalculator.ru';
+// Определяем домен в зависимости от окружения развертывания
+const getCanonicalOrigin = () => {
+  // В первую очередь используем Astro.site (определяется в astro.config.mjs)
+  if (Astro.site) return Astro.site;
+
+  // Fallback для различных окружений
+  if (import.meta.env.VERCEL_URL) {
+    return `https://${import.meta.env.VERCEL_URL}`;
+  }
+
+  // Для GitHub Pages
+  if (import.meta.env.GITHUB_PAGES) {
+    const repo = import.meta.env.GITHUB_REPOSITORY?.split('/')[1];
+    const owner = import.meta.env.GITHUB_REPOSITORY_OWNER;
+    if (owner && repo) {
+      return `https://${owner}.github.io/${repo}`;
+    }
+  }
+
+  // Локальная разработка или fallback
+  return 'https://bookscalculator.ru';
+};
+
+const canonicalOrigin = getCanonicalOrigin();
 const canonicalURL = new URL(Astro.url.pathname, canonicalOrigin);
 ---
 
