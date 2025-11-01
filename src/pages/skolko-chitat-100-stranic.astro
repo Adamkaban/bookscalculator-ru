@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
+import SEOHead from '../components/SEOHead.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+---
+
+<BaseLayout>
+  <SEOHead
+    slot="head"
+    title="Сколько по времени читать 100 страниц - точные расчеты"
+    description="Узнайте, сколько времени потребуется на чтение 100 страниц при разной скорости. Практические расчеты для учебы, работы и досуга"
+    keywords="100 страниц время, сколько читать 100 страниц, скорость чтения, время на чтение"
+  />
+
+  <style>
+    /* Визуальное выделение подзаголовков */
+    h2 {
+      background: #f8fafc !important;
+      border-bottom: 4px solid #3b82f6 !important;
+      padding: 1rem !important;
+      margin: 2rem 0 1rem 0 !important;
+      border-radius: 8px 8px 0 0 !important;
+      font-weight: 700 !important;
+    }
+
+    h3 {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 0.75rem !important;
+      margin: 1.5rem 0 1rem 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.25rem !important;
+        padding: 0.75rem !important;
+      }
+
+      h3 {
+        font-size: 1.125rem !important;
+        padding: 0.5rem !important;
+      }
+    }
+  </style>
+
+  <Header />
+
+  <main>
+    <div class="min-h-screen bg-white">
+      <!-- Hero секция -->
+      <section class="bg-gradient-to-br from-slate-50 to-blue-50 py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Сколько по времени читать 100 страниц
+            </h1>
+            <p class="text-xl text-slate-600">
+              Точные расчеты времени чтения при разной скорости и сложности текста
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Основной контент -->
+      <section class="py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="prose prose-lg prose-slate max-w-none">
+
+              <h2>Быстрый ответ: от 2 до 5 часов</h2>
+              <p>
+                Среднестатистический читатель прочитает 100 страниц за <strong>2.5-3.5 часа</strong> при
+                скорости 200-250 слов в минуту. Однако точное время зависит от множества факторов:
+                типа текста, вашей скорости чтения и уровня концентрации.
+              </p>
+
+              <h2>Расчет времени при разной скорости чтения</h2>
+              <p>
+                Вот точные расчеты для 100 страниц (примерно 25,000 слов) при разной скорости:
+              </p>
+
+              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">🐢</div>
+                  <h3 class="font-semibold text-orange-900">Медленное чтение</h3>
+                  <p class="text-sm text-orange-600 mb-2">150 слов/мин</p>
+                  <p class="text-2xl font-bold text-orange-700 mt-2">~3 часа</p>
+                  <p class="text-xs text-orange-600">Сложные тексты</p>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">📖</div>
+                  <h3 class="font-semibold text-blue-900">Среднее чтение</h3>
+                  <p class="text-sm text-blue-600 mb-2">200-250 слов/мин</p>
+                  <p class="text-2xl font-bold text-blue-700 mt-2">~2 часа</p>
+                  <p class="text-xs text-blue-600">Обычные книги</p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">⚡</div>
+                  <h3 class="font-semibold text-green-900">Быстрое чтение</h3>
+                  <p class="text-sm text-green-600 mb-2">300-350 слов/мин</p>
+                  <p class="text-2xl font-bold text-green-700 mt-2">~1.5 часа</p>
+                  <p class="text-xs text-green-600">Легкие тексты</p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+                  <div class="text-2xl mb-2">🚀</div>
+                  <h3 class="font-semibold text-purple-900">Скоростное чтение</h3>
+                  <p class="text-sm text-purple-600 mb-2">400+ слов/мин</p>
+                  <p class="text-2xl font-bold text-purple-700 mt-2">~1 час</p>
+                  <p class="text-xs text-purple-600">Беглое чтение</p>
+                </div>
+              </div>
+
+              <h2>Время чтения в зависимости от типа текста</h2>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                  <div class="text-3xl mb-3">📚</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Художественная литература</h3>
+                  <p class="text-2xl font-bold text-blue-600 mb-2">2-3 часа</p>
+                  <p class="text-slate-600 text-sm mb-3">
+                    Романы, повести, рассказы обычно читаются в среднем темпе.
+                  </p>
+                  <ul class="text-xs text-slate-500 space-y-1">
+                    <li>• Детективы: 1.5-2 часа</li>
+                    <li>• Классика: 3-4 часа</li>
+                    <li>• Фэнтези: 2-3 часа</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                  <div class="text-3xl mb-3">🎓</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Учебная литература</h3>
+                  <p class="text-2xl font-bold text-orange-600 mb-2">3-5 часов</p>
+                  <p class="text-slate-600 text-sm mb-3">
+                    Требует внимательного чтения и осмысления материала.
+                  </p>
+                  <ul class="text-xs text-slate-500 space-y-1">
+                    <li>• Конспектирование: +50% времени</li>
+                    <li>• Технические тексты: 4-6 часов</li>
+                    <li>• Научные статьи: 5-7 часов</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                  <div class="text-3xl mb-3">💼</div>
+                  <h3 class="text-lg font-semibold text-slate-900 mb-3">Деловая литература</h3>
+                  <p class="text-2xl font-bold text-green-600 mb-2">2-3 часа</p>
+                  <p class="text-slate-600 text-sm mb-3">
+                    Бизнес-книги, саморазвитие, профессиональная литература.
+                  </p>
+                  <ul class="text-xs text-slate-500 space-y-1">
+                    <li>• С заметками: +30% времени</li>
+                    <li>• Беглое чтение: 1-1.5 часа</li>
+                    <li>• Глубокое изучение: 4-5 часов</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2>Факторы, влияющие на скорость</h2>
+
+              <h3>Внешние факторы:</h3>
+              <ul>
+                <li><strong>Отвлекающие факторы:</strong> шум, уведомления на телефоне могут увеличить время на 30-50%</li>
+                <li><strong>Время суток:</strong> утром и днем читается быстрее, чем поздно вечером</li>
+                <li><strong>Усталость:</strong> снижает скорость на 20-40%</li>
+                <li><strong>Формат книги:</strong> электронная книга vs бумажная (разница 5-10%)</li>
+              </ul>
+
+              <h3>Внутренние факторы:</h3>
+              <ul>
+                <li><strong>Знакомство с темой:</strong> знакомая тема читается на 30-50% быстрее</li>
+                <li><strong>Словарный запас:</strong> чем богаче словарь, тем быстрее чтение</li>
+                <li><strong>Цель чтения:</strong> для удовольствия vs для запоминания</li>
+                <li><strong>Уровень концентрации:</strong> фокусировка ускоряет чтение на 25-35%</li>
+              </ul>
+
+              <!-- CTA-плашка в середине контента -->
+              <CTABanner />
+
+              <h2>Практические сценарии</h2>
+
+              <div class="bg-blue-50 border-l-4 border-blue-400 p-6 my-8">
+                <h3 class="text-blue-800 font-semibold mb-3">📖 Вы читаете перед сном</h3>
+                <p class="text-blue-700 mb-2">
+                  <strong>План:</strong> Разбейте 100 страниц на 3-4 вечера по 25-30 страниц.
+                </p>
+                <p class="text-blue-600 text-sm">
+                  При скорости 200 слов/мин потребуется около 45 минут каждый вечер.
+                </p>
+              </div>
+
+              <div class="bg-green-50 border-l-4 border-green-400 p-6 my-8">
+                <h3 class="text-green-800 font-semibold mb-3">🎓 Подготовка к экзамену</h3>
+                <p class="text-green-700 mb-2">
+                  <strong>План:</strong> Учитывайте время на конспекты и повторение.
+                </p>
+                <p class="text-green-600 text-sm">
+                  100 страниц учебника = 3 часа чтения + 2 часа на заметки = 5 часов минимум.
+                </p>
+              </div>
+
+              <div class="bg-purple-50 border-l-4 border-purple-400 p-6 my-8">
+                <h3 class="text-purple-800 font-semibold mb-3">✈️ Чтение в дороге</h3>
+                <p class="text-purple-700 mb-2">
+                  <strong>План:</strong> Идеально для поездки на 2-3 часа.
+                </p>
+                <p class="text-purple-600 text-sm">
+                  В транспорте скорость снижается на 15-20%, поэтому заложите 2.5-3 часа.
+                </p>
+              </div>
+
+              <h2>Советы для ускорения чтения</h2>
+
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+                  <h3 class="text-slate-900 font-semibold mb-3">✅ Что помогает:</h3>
+                  <ul class="text-slate-700 space-y-2 text-sm">
+                    <li>✓ Убрать все отвлекающие факторы</li>
+                    <li>✓ Читать в хорошо освещенном месте</li>
+                    <li>✓ Делать короткие перерывы каждые 30-40 минут</li>
+                    <li>✓ Использовать закладку или палец для фокуса</li>
+                    <li>✓ Читать в удобной позе</li>
+                  </ul>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+                  <h3 class="text-slate-900 font-semibold mb-3">❌ Что замедляет:</h3>
+                  <ul class="text-slate-700 space-y-2 text-sm">
+                    <li>✗ Проговаривание текста про себя (субвокализация)</li>
+                    <li>✗ Возвращение к уже прочитанному</li>
+                    <li>✗ Чтение слово за словом</li>
+                    <li>✗ Отсутствие фокуса на тексте</li>
+                    <li>✗ Чтение в плохих условиях</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2>Главное правило</h2>
+              <p>
+                <strong>Не торопитесь ради скорости.</strong> Важнее понять и запомнить прочитанное,
+                чем просто пролистать страницы. Качественное чтение 100 страниц за 4 часа гораздо
+                ценнее поверхностного за 1 час.
+              </p>
+
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 my-8">
+                <p class="text-yellow-800">
+                  <strong>💡 Совет:</strong> Используйте наш калькулятор чтения на главной странице,
+                  чтобы точно рассчитать время для вашей конкретной книги с учетом вашей скорости чтения!
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Цитата в конце страницы -->
+  <QuoteBlock />
+
+  <SimpleFooter />
+</BaseLayout>
