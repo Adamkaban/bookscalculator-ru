@@ -37,6 +37,7 @@ const keywords = book.seo?.keywords?.join(', ') || `${book.title}, ${book.author
 
 <BaseLayout>
   <SEOHead
+    slot="head"
     title={title}
     description={description}
     keywords={keywords}

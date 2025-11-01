@@ -9,6 +9,11 @@ Disallow: /scripts/
 Disallow: /*.json$
 Disallow: /p-seo text/
 
+# Запрещаем индексацию preview URL от Vercel
+# Только основной домен bookscalculator.ru должен индексироваться
+User-agent: *
+Host: bookscalculator.ru
+
 # Запрещаем индексацию дублированного контента
 Disallow: /skolko-stranic-*-slov$
 Noindex: /skolko-stranic-*-slov$
@@ -24,26 +29,6 @@ Allow: /skolko-chitat-stranic
 Allow: /skolko-slov-na-stranice
 Allow: /skolko-chitat-100-stranic
 
-# Запрещаем индексацию страниц слов (оставляем только основные)
-Disallow: /skolko-stranic-100-slov
-Disallow: /skolko-stranic-200-slov
-Disallow: /skolko-stranic-300-slov
-Disallow: /skolko-stranic-400-slov
-Disallow: /skolko-stranic-500-slov
-Disallow: /skolko-stranic-600-slov
-Disallow: /skolko-stranic-700-slov
-Disallow: /skolko-stranic-800-slov
-Disallow: /skolko-stranic-900-slov
-Disallow: /skolko-stranic-1000-slov
-Disallow: /skolko-stranic-1250-slov
-Disallow: /skolko-stranic-1500-slov
-Disallow: /skolko-stranic-2000-slov
-Disallow: /skolko-stranic-2500-slov
-Disallow: /skolko-stranic-3000-slov
-Disallow: /skolko-stranic-3500-slov
-Disallow: /skolko-stranic-4000-slov
-Disallow: /skolko-stranic-4500-slov
-Disallow: /skolko-stranic-5000-slov
 
 # Sitemap
 Sitemap: https://bookscalculator.ru/sitemap.xml

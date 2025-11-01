@@ -7,6 +7,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   // Основной домен сайта для canonical URL и sitemap
   site: 'https://bookscalculator.ru',
+
+  // Важно: всегда использовать один формат URL (без trailing slash)
+  // Это предотвращает дублирование страниц и проблемы с canonical
+  trailingSlash: 'never',
+
   compressHTML: true,
 
   build: {

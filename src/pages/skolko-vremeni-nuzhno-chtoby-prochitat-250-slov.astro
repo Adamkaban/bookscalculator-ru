@@ -43,8 +43,12 @@ function calculateReadingTimeSeconds(words, wpm) {
   }
 }
 
-// Канонический URL
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Формируем правильный canonical URL
+const canonicalOrigin = 'https://bookscalculator.ru';
+const cleanPathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalURL = cleanPathname === '/'
+  ? canonicalOrigin + '/'
+  : canonicalOrigin + cleanPathname;
 
 // SEO данные - оптимизировано для Яндекс
 const seoData = {
@@ -71,6 +75,7 @@ const seoData = {
 
 <BaseLayout>
   <SEOHead
+    slot="head"
     title={seoData.title}
     description={seoData.description}
     keywords={seoData.keywords.join(', ')}

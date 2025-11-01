@@ -5,7 +5,12 @@ import SimpleFooter from '../components/SimpleFooter.astro';
 import SEOHead from '../components/SEOHead.astro';
 import QuoteBlock from '../components/QuoteBlock.astro';
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Формируем правильный canonical URL
+const canonicalOrigin = 'https://bookscalculator.ru';
+const cleanPathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalURL = cleanPathname === '/'
+  ? canonicalOrigin + '/'
+  : canonicalOrigin + cleanPathname;
 
 const wordsToPagesData = [
     { words: 100, pages: '0.2 страницы', isGreen: true },
@@ -39,6 +44,7 @@ const calculationParams = {
 
 <BaseLayout>
   <SEOHead
+    slot="head"
     title="Сколько страниц 100 слов? Калькулятор страниц"
     description="100 слов = 0.2 страницы. Рассчитайте, сколько страниц займут ваши тексты с помощью интерактивного калькулятора страниц для текста."
     keywords="сколько страниц 100 слов, 100 слов сколько страниц, калькулятор страниц для текста, расчет страниц"

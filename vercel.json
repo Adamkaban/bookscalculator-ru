@@ -3,6 +3,18 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "https://www.bookscalculator.ru/:path*",
+      "destination": "https://bookscalculator.ru/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path(.*)/",
+      "destination": "/:path",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -14,6 +26,10 @@
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
         }
       ]
     }

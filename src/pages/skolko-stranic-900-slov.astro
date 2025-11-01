@@ -7,7 +7,12 @@ import QuoteBlock from '../components/QuoteBlock.astro';
 
 
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Формируем правильный canonical URL
+const canonicalOrigin = 'https://bookscalculator.ru';
+const cleanPathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalURL = cleanPathname === '/'
+  ? canonicalOrigin + '/'
+  : canonicalOrigin + cleanPathname;
 const wordsToPagesData = [
     { words: 100, pages: '0.2 страницы', isGreen: true },
   { words: 200, pages: '0.4 страницы', isGreen: true },
@@ -40,6 +45,7 @@ const calculationParams = {
 
 <BaseLayout>
   <SEOHead
+    slot="head"
     title="Сколько страниц 900 слов? Калькулятор страниц"
     description="900 слов = 1.8 страницы. Рассчитайте, сколько страниц займут ваши тексты с помощью интерактивного калькулятора страниц для текста."
     keywords="сколько страниц 900 слов, 900 слов сколько страниц, калькулятор страниц для текста, расчет страниц"

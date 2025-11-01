@@ -26,8 +26,12 @@ const {
 const finalTitle = title || "Калькулятор времени чтения книг";
 
 // Канонический URL всегда должен указывать на основной домен сайта
-const canonicalOrigin = Astro.site || 'https://bookscalculator.ru';
-const canonicalURL = new URL(Astro.url.pathname, canonicalOrigin);
+const canonicalOrigin = 'https://bookscalculator.ru';
+// Убираем trailing slash из pathname и формируем правильный canonical URL
+const cleanPathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalURL = cleanPathname === '/'
+  ? canonicalOrigin + '/'
+  : canonicalOrigin + cleanPathname;
 ---
 
 <!-- Основные мета-теги -->
