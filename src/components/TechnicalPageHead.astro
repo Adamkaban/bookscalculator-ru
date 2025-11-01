@@ -67,46 +67,44 @@ const canonicalURL = cleanPathname === '/'
 <meta name="twitter:image:alt" content={finalTitle} />
 
 <!-- Schema.org разметка -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": type === 'article' ? "Article" : "WebSite",
-    "name": finalTitle,
-    "description": description,
-    "url": canonicalURL,
-    "inLanguage": "ru-RU",
-    "copyrightHolder": {
-      "@type": "Organization",
-      "name": "BooksCalculator.ru",
-      "url": "https://bookscalculator.ru"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "BooksCalculator.ru",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://bookscalculator.ru/images/hero-section.webp"
-      }
-    },
-    ...(author && {
-      "author": {
-        "@type": "Person",
-        "name": author
-      }
-    }),
-    ...(publishedTime && { "datePublished": publishedTime }),
-    ...(modifiedTime && { "dateModified": modifiedTime }),
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": canonicalURL
-    },
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "BooksCalculator.ru",
-      "url": "https://bookscalculator.ru"
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": type === 'article' ? "Article" : "WebSite",
+  "name": finalTitle,
+  "description": description,
+  "url": canonicalURL,
+  "inLanguage": "ru-RU",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "BooksCalculator.ru",
+    "url": "https://bookscalculator.ru"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BooksCalculator.ru",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://bookscalculator.ru/images/hero-section.webp"
     }
+  },
+  ...(author && {
+    "author": {
+      "@type": "Person",
+      "name": author
+    }
+  }),
+  ...(publishedTime && { "datePublished": publishedTime }),
+  ...(modifiedTime && { "dateModified": modifiedTime }),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "BooksCalculator.ru",
+    "url": "https://bookscalculator.ru"
   }
-</script>
+})} />
 
 <!-- Предзагрузка важных ресурсов -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -63,68 +63,64 @@ const canonicalURL = cleanPathname === '/'
 <meta name="twitter:image:alt" content={finalTitle} />
 
 <!-- Schema.org разметка для Яндекс -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": type === 'article' ? "Article" : "WebSite",
-    "name": finalTitle,
-    "description": description,
-    "url": canonicalURL,
-    "inLanguage": "ru-RU",
-    "copyrightHolder": {
-      "@type": "Organization",
-      "name": "BooksCalculator.ru",
-      "url": "https://bookscalculator.ru"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "BooksCalculator.ru",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${canonicalOrigin}/images/hero-section.webp`
-      }
-    },
-    ...(author && {
-      "author": {
-        "@type": "Person",
-        "name": author
-      }
-    }),
-    ...(publishedTime && { "datePublished": publishedTime }),
-    ...(modifiedTime && { "dateModified": modifiedTime }),
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": canonicalURL
-    },
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "BooksCalculator.ru",
-      "url": "https://bookscalculator.ru"
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": type === 'article' ? "Article" : "WebSite",
+  "name": finalTitle,
+  "description": description,
+  "url": canonicalURL,
+  "inLanguage": "ru-RU",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "BooksCalculator.ru",
+    "url": "https://bookscalculator.ru"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BooksCalculator.ru",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${canonicalOrigin}/images/hero-section.webp`
     }
-  }
-</script>
-
-<!-- Дополнительная разметка для Яндекс -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
+  },
+  ...(author && {
+    "author": {
+      "@type": "Person",
+      "name": author
+    }
+  }),
+  ...(publishedTime && { "datePublished": publishedTime }),
+  ...(modifiedTime && { "dateModified": modifiedTime }),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL
+  },
+  "isPartOf": {
     "@type": "WebSite",
     "name": "BooksCalculator.ru",
-    "alternateName": "Калькулятор времени чтения книг",
-    "url": "https://bookscalculator.ru",
-    "description": "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие с нашим удобным калькулятором времени чтения",
-    "inLanguage": "ru-RU",
-    "copyrightHolder": {
-      "@type": "Organization",
-      "name": "BooksCalculator.ru"
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": `${canonicalOrigin}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
+    "url": "https://bookscalculator.ru"
   }
-</script>
+})} />
+
+<!-- Дополнительная разметка для Яндекс -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "BooksCalculator.ru",
+  "alternateName": "Калькулятор времени чтения книг",
+  "url": "https://bookscalculator.ru",
+  "description": "Узнайте, сколько книг вы сможете прочитать за месяц, год или десятилетие с нашим удобным калькулятором времени чтения",
+  "inLanguage": "ru-RU",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "BooksCalculator.ru"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${canonicalOrigin}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+})} />
 
 <!-- Предзагрузка важных ресурсов -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -5,11 +5,6 @@
   "installCommand": "npm install",
   "redirects": [
     {
-      "source": "https://www.bookscalculator.ru/:path*",
-      "destination": "https://bookscalculator.ru/:path*",
-      "permanent": true
-    },
-    {
       "source": "/:path(.*)/",
       "destination": "/:path",
       "permanent": true
