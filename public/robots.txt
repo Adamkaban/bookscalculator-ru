@@ -7,7 +7,7 @@ Disallow: /admin/
 Disallow: /_astro/
 Disallow: /scripts/
 Disallow: /*.json
-Disallow: /p-seo text/
+Disallow: /p-seo%20text/
 
 # Запрещаем индексацию страниц со словами (используем noindex в meta-тегах)
 Disallow: /skolko-stranic-*-slov
