@@ -10,7 +10,13 @@
       "permanent": true
     },
     {
-      "source": "https://www.bookscalculator.ru/:path*",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.bookscalculator.ru"
+        }
+      ],
       "destination": "https://bookscalculator.ru/:path*",
       "permanent": true
     }
