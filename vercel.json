@@ -8,6 +8,11 @@
       "source": "/:path(.*)/",
       "destination": "/:path",
       "permanent": true
+    },
+    {
+      "source": "https://www.bookscalculator.ru/:path*",
+      "destination": "https://bookscalculator.ru/:path*",
+      "permanent": true
     }
   ],
   "headers": [

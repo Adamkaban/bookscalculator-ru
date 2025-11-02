@@ -8,6 +8,7 @@ export interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -18,7 +19,8 @@ const {
   type = 'website',
   publishedTime,
   modifiedTime,
-  author
+  author,
+  noindex = false
 } = Astro.props;
 
 // Fallback для пустого тайтла
@@ -40,7 +42,7 @@ const canonicalURL = cleanPathname === '/'
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author || "BooksCalculator.ru"} />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
 
 <!-- Канонический URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -139,7 +141,7 @@ const canonicalURL = cleanPathname === '/'
 <!-- Специфичные мета-теги для Яндекс -->
 <meta name="yandex-verification" content="YOUR_YANDEX_VERIFICATION_CODE" />
 <meta name="format-detection" content="telephone=no" />
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"} />
 
 <!-- Мета-теги для социальных сетей VK и Одноклассники -->
 <meta name="vk:image" content={`${canonicalOrigin}${image}`} />

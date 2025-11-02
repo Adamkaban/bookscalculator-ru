@@ -6,29 +6,11 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /_astro/
 Disallow: /scripts/
-Disallow: /*.json$
+Disallow: /*.json
 Disallow: /p-seo text/
 
-# Запрещаем индексацию preview URL от Vercel
-# Только основной домен bookscalculator.ru должен индексироваться
-User-agent: *
-Host: bookscalculator.ru
-
-# Запрещаем индексацию дублированного контента
-Disallow: /skolko-stranic-*-slov$
-Noindex: /skolko-stranic-*-slov$
-
-# Разрешаем основные страницы
-Allow: /skolko-chitat-*
-Allow: /
-Allow: /o-proekte
-Allow: /fakty-ob-izvestnyh-knigah
-Allow: /skolko-knig-mozhno-prochitat-za-god
-Allow: /skolko-knig-nado-chitat-v-den
-Allow: /skolko-chitat-stranic
-Allow: /skolko-slov-na-stranice
-Allow: /skolko-chitat-100-stranic
-
+# Запрещаем индексацию страниц со словами (используем noindex в meta-тегах)
+Disallow: /skolko-stranic-*-slov
 
 # Sitemap
 Sitemap: https://bookscalculator.ru/sitemap.xml
