@@ -13,7 +13,7 @@ Disallow: /p-seo%20text/
 Disallow: /skolko-stranic-*-slov
 
 # Sitemap
-Sitemap: https://bookscalculator.ru/sitemap.xml
+Sitemap: https://bookscalculator.ru/sitemap-index.xml
 
 # Crawl-delay для предотвращения перегрузки сервера
 Crawl-delay: 1
