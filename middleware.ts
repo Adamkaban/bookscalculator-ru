@@ -1,17 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+export const config = {
+  matcher: '/',
+};
 
-export function middleware(request: NextRequest) {
-  const url = request.nextUrl;
+export default function middleware(request: Request) {
+  const url = new URL(request.url);
 
   // Redirect old WordPress URLs with ?p= parameter to homepage
   if (url.searchParams.has('p') && url.pathname === '/') {
     url.searchParams.delete('p');
-    return NextResponse.redirect(url, 301);
+    return Response.redirect(url.toString(), 301);
   }
 
-  return NextResponse.next();
+  return new Response(null, {
+    headers: request.headers,
+  });
 }
-
-export const config = {
-  matcher: '/',
-};
