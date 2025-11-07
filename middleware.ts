@@ -11,7 +11,5 @@ export default function middleware(request: Request) {
     return Response.redirect(url.toString(), 301);
   }
 
-  return new Response(null, {
-    headers: request.headers,
-  });
+  // Пропускаем запрос дальше (не блокируем)
 }
