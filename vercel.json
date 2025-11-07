@@ -12,7 +12,7 @@
           "key": "p"
         }
       ],
-      "destination": "/",
+      "destination": "https://bookscalculator.ru/",
       "permanent": true
     },
     {
