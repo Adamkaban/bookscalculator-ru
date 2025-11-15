@@ -10,6 +10,8 @@ Disallow: /*.json
 Disallow: /p-seo%20text/
 
 # Запрещаем индексацию страниц со словами (используем noindex в meta-тегах)
+# Разрешаем индексацию только страницы со 100 словами
+Allow: /skolko-stranic-100-slov
 Disallow: /skolko-stranic-*-slov
 
 # Sitemap
