@@ -350,8 +350,7 @@ const calculationParams = {
   <meta name="twitter:description" content="100 слов = 0.2 страницы. Интерактивная таблица расчета количества страниц для текста">
 
   <!-- Структурированные данные Schema.org -->
-  <script type="application/ld+json">
-    {
+  <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Сколько страниц 100 слов? Калькулятор страниц",
@@ -364,8 +363,7 @@ const calculationParams = {
         "price": "0",
         "priceCurrency": "RUB"
       }
-    }
-  </script>
+  })} />
 </BaseLayout>
 
 <script>

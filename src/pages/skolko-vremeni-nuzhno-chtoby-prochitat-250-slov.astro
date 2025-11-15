@@ -484,38 +484,36 @@ const seoData = {
   <SimpleFooter />
 
   <!-- Структурированные данные для поисковиков -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Калькулятор времени чтения слов",
-      "description": "Бесплатный онлайн калькулятор для расчета времени чтения текста. Рассчитайте, сколько времени потребуется для чтения любого количества слов при разных скоростях чтения.",
-      "url": canonicalURL,
-      "applicationCategory": "Utility",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "RUB"
-      },
-      "featureList": [
-        "Расчет времени чтения от 10 до 100000 слов",
-        "5 скоростей чтения от 150 до 400+ слов в минуту",
-        "Точные расчеты в секундах и минутах",
-        "Интерактивная таблица с кликабельными строками",
-        "Адаптивный дизайн для мобильных устройств"
-      ],
-      "screenshot": "https://bookscalculator.ru/images/hero-section.webp",
-      "author": {
-        "@type": "Organization",
-        "name": "BooksCalculator.ru"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "BooksCalculator.ru"
-      }
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Калькулятор времени чтения слов",
+    "description": "Бесплатный онлайн калькулятор для расчета времени чтения текста. Рассчитайте, сколько времени потребуется для чтения любого количества слов при разных скоростях чтения.",
+    "url": canonicalURL,
+    "applicationCategory": "Utility",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "RUB"
+    },
+    "featureList": [
+      "Расчет времени чтения от 10 до 100000 слов",
+      "5 скоростей чтения от 150 до 400+ слов в минуту",
+      "Точные расчеты в секундах и минутах",
+      "Интерактивная таблица с кликабельными строками",
+      "Адаптивный дизайн для мобильных устройств"
+    ],
+    "screenshot": "https://bookscalculator.ru/images/hero-section.webp",
+    "author": {
+      "@type": "Organization",
+      "name": "BooksCalculator.ru"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BooksCalculator.ru"
     }
-  </script>
+  })} />
 
   <!-- Дополнительные мета-теги для поисковиков -->
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
